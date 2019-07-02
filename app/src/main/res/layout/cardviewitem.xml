@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <variable
+            name="hotel"
+            type="com.example.firstapp.models.Hotel" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/cardview_compat_inset_shadow"
+
+
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/parent_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageViewer"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:foregroundGravity="center"
+                android:scaleType="centerCrop"
+                app:ImageUrl="@{hotel.imageSource}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <RatingBar
+                android:id="@+id/stars"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3pt"
+                android:numStars="@{hotel.stars}"
+                android:rating="@{hotel.stars}"
+                android:stepSize="1.0"
+                android:theme="@style/RatingBar"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewer"
+                app:layout_constraintStart_toStartOf="@+id/imageViewer" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/hearts"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_margin="2pt"
+                android:tint="@android:color/holo_red_dark"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewer"
+                app:layout_constraintTop_toTopOf="@+id/imageViewer"
+                app:srcCompat="@drawable/fav" />
+
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="2dp"
+                android:text="@{hotel.description}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewer"
+                app:layout_constraintStart_toEndOf="@+id/stars"
+                app:layout_constraintTop_toTopOf="@+id/stars" />
+
+            <TextView
+                android:id="@+id/header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4pt"
+                android:text="@{hotel.header}"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toTopOf="@+id/stars"
+                app:layout_constraintStart_toStartOf="@+id/imageViewer" />
+
+
+            <TextView
+                android:id="@+id/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4pt"
+                android:text="@{hotel.rate}"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/HorizentalSeperator"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewer" />
+
+
+            <TextView
+                android:id="@+id/Footer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4pt"
+                android:text="@{hotel.footer}"
+                android:textColor="@color/green"
+                app:layout_constraintBottom_toBottomOf="@+id/HorizentalSeperator"
+                app:layout_constraintEnd_toEndOf="@id/imageViewer"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewer"
+
+                />
+
+            <View
+                android:id="@+id/HorizentalSeperator"
+                android:layout_width="wrap_content"
+                android:layout_height="1dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/gray"
+                app:layout_constraintEnd_toEndOf="@id/imageViewer"
+                app:layout_constraintStart_toStartOf="@+id/imageViewer"
+                app:layout_constraintTop_toBottomOf="@+id/Footer" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</layout>

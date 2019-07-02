@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "139576124841",
+    "firebase_url": "https://yamsafer-97593.firebaseio.com",
+    "project_id": "yamsafer-97593",
+    "storage_bucket": "yamsafer-97593.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139576124841:android:4b27071f992a7381",
+        "android_client_info": {
+          "package_name": "com.example.firstapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139576124841-99iok0ohaot8d82fdkhimuv21r99ank9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firstapp",
+            "certificate_hash": "c0fb4ba70a742f5776609c13dfadc51827b6bb29"
+          }
+        },
+        {
+          "client_id": "139576124841-69jjjks974m2jr5ldm8javoucf0om86f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPwQqcdtr2svZv0BsDBVBqwyY9I3jXLr4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139576124841-69jjjks974m2jr5ldm8javoucf0om86f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

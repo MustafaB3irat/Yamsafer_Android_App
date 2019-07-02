@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Yamsafer</string>
+    <string name="strikedText"><strike>ILS 897</strike></string>
+
+    <string name="facebook_app_id">412681619457321</string>
+    <string name="fb_login_protocol_scheme">fb412681619457321</string>
+
+</resources>

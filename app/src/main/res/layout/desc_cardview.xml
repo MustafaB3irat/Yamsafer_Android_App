@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+
+        <variable
+            name="detail"
+            type="com.example.firstapp.models.CardFactory" />
+    </data>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <RatingBar
+                android:id="@+id/detailed_rating_bar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="5dp"
+                android:numStars="@{detail.stars}"
+                android:rating="@{detail.stars}"
+                android:stepSize="1.0"
+                android:theme="@style/RatingBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/detailed_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@{detail.header}"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/detailed_rating_bar"
+                app:layout_constraintStart_toStartOf="@+id/detailed_rating_bar"
+                app:layout_constraintTop_toBottomOf="@+id/detailed_rating_bar" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="@{detail.description}"
+                app:layout_constraintEnd_toEndOf="@+id/detailed_header"
+                app:layout_constraintStart_toStartOf="@+id/detailed_header"
+                app:layout_constraintTop_toBottomOf="@+id/detailed_header" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</layout>
