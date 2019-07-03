@@ -14,7 +14,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 public class SignUpPresenter implements com.example.firstapp.mvpinterfaces.signupinterfaces.SignUpPresenter {
@@ -38,13 +41,14 @@ public class SignUpPresenter implements com.example.firstapp.mvpinterfaces.signu
                 progressDialog.dismiss();
 
                 if (task.isSuccessful()) {
-                    Log.d("Success", "sadads");
+
                     signUpView.getSignUpState(true);
 
                     firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             FirebaseUser user = firebaseAuth.getCurrentUser();
+
                             user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

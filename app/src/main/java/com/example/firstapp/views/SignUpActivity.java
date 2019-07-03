@@ -58,6 +58,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
         if (state) {
             Toast.makeText(this, "Activation link sent to your email, please check it out ", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, EmailActivationTemp.class);
+//            intent.putExtra("email" , signUpBinding.email.getText());
+//            intent.putExtra("password" , signUpBinding.password.getText());
             startActivity(intent);
            // finish();
         } else {
