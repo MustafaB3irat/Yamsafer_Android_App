@@ -15,6 +15,7 @@ import com.example.firstapp.R;
 import com.example.firstapp.databinding.SignInBinding;
 import com.example.firstapp.mvpinterfaces.signininterfaces.SigninPresenter;
 import com.example.firstapp.mvpinterfaces.signininterfaces.SigninView;
+import com.example.firstapp.views.Dialogs.InternationalPhoneDialog;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -52,6 +53,24 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
         signInViaGoogle(this);
 
         facebookLogin(this);
+
+        signInViaPhone();
+
+        onClickSignUp(this);
+
+    }
+
+    private void onClickSignUp(final AppCompatActivity activity) {
+
+        signInBinding.signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, SignUpActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
 
@@ -214,6 +233,18 @@ public class SignInActivity extends AppCompatActivity implements SigninView {
         }
 
         return null;
+    }
+
+
+    private void signInViaPhone() {
+
+        signInBinding.phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InternationalPhoneDialog phoneDialog = new InternationalPhoneDialog();
+                phoneDialog.show(getSupportFragmentManager(), "Verify By Phone Number");
+            }
+        });
     }
 
 }

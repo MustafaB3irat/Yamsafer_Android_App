@@ -7,23 +7,36 @@ import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 
 public interface SigninPresenter {
 
 
-    void signInUser(String email , String password);
+    void signInUser(String email, String password);
+
     FirebaseUser getCurrentUser();
+
     void signOut();
+
     void signOutGoogle();
+
     void signOutFacebook();
+
     LoginManager getFacebookLoginManager();
+
+    PhoneAuthProvider getPhoneProvider();
+
+    FirebaseAuth getFirebaseAuth();
 
     GoogleSignInAccount checkIfUserSignedInGoogle();
 
     GoogleSignInClient getGoogleClient();
 
     CallbackManager getFacebookCallBackManager();
+
     FacebookCallback<LoginResult> getFacebookLoginResult();
 
 }

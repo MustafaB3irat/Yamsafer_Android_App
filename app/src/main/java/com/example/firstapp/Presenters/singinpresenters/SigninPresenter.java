@@ -1,35 +1,32 @@
 package com.example.firstapp.Presenters.singinpresenters;
 
-import android.os.Bundle;
+
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.firstapp.mvpinterfaces.signininterfaces.SigninModel;
 import com.example.firstapp.mvpinterfaces.signininterfaces.SigninView;
+import com.example.firstapp.views.Dialogs.InternationalPhoneDialog;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import org.json.JSONObject;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
 
 public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signininterfaces.SigninPresenter {
 
@@ -43,6 +40,8 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
     //SignInClient
     private GoogleSignInClient googleSignInClient;
 
+    //Phone Sign in
+    private PhoneAuthCredential phoneAuthCredential;
 
     public SigninPresenter(SigninView signinView) {
         this.signinView = signinView;
@@ -99,8 +98,19 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
 
 
     @Override
-    public LoginManager getFacebookLoginManager(){
+    public LoginManager getFacebookLoginManager() {
         return loginManager;
+    }
+
+
+    @Override
+    public PhoneAuthProvider getPhoneProvider() {
+        return PhoneAuthProvider.getInstance();
+    }
+
+    @Override
+    public FirebaseAuth getFirebaseAuth() {
+        return FirebaseAuth.getInstance();
     }
 
 

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <net.rimoto.intlphoneinput.IntlPhoneInput
+            android:id="@+id/phone_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="10dp"
+            app:flagPaddingBottom="4dp"
+            app:flagPaddingEnd="4dp"
+            app:flagPaddingStart="1dp"
+            app:flagPaddingTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:textColor="#000000"
+            app:textSize="14sp">
+
+
+        </net.rimoto.intlphoneinput.IntlPhoneInput>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/send"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="50dp"
+            android:backgroundTint="#3685AF"
+            android:text="Send Confirmation Code"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/phone_input"
+            app:layout_constraintStart_toStartOf="@+id/phone_input"
+            app:layout_constraintTop_toBottomOf="@+id/phone_input" />
+
+        <EditText
+            android:visibility="gone"
+            android:inputType="number"
+            android:id="@+id/confirmation_code"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:hint="Enter Code Sent To You"
+            app:layout_constraintEnd_toEndOf="@+id/send"
+            app:layout_constraintStart_toStartOf="@+id/send"
+            app:layout_constraintTop_toBottomOf="@+id/send" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:visibility="gone"
+            android:id="@+id/Sign_in"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="50dp"
+            android:backgroundTint="#3685AF"
+            android:text="Sign In"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/confirmation_code"
+            app:layout_constraintStart_toStartOf="@+id/confirmation_code"
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_code" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
