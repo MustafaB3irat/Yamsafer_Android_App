@@ -1,8 +1,42 @@
 <resources>
     <string name="app_name">Yamsafer</string>
     <string name="strikedText"><strike>ILS 897</strike></string>
-
+    <string name="Error">Error!</string>
     <string name="facebook_app_id">412681619457321</string>
     <string name="fb_login_protocol_scheme">fb412681619457321</string>
+    <string name="search_bar">Where would you like to go?</string>
+    <string name="recent_search">Recent Searches</string>
+    <string name="hote_deals">Today\'s Hot Deals</string>
+    <string name="popular_on_yamsafer">Popular On Yamsafer </string>
+    <string name="flightHeader">Flights </string>
+    <string name="new_badge">NEW </string>
+    <string name="flight_flying_from">Flying from </string>
+    <string name="flight_flying_to">Flying to </string>
+    <string name="flight_Departure_date">Departure Date </string>
+    <string name="flight_return_date">Return Date </string>
+    <string name="flight_traverlers_cabin">Traverlers &amp; Cabin Class </string>
+    <string name="show_me_non_stop">Show me non-stop flights only </string>
+    <string name="empty_email">*Email is Required </string>
+    <string name="empty_password">*Password is Required </string>
+    <string name="wrongFormatEmail">*Not Valid Email! </string>
+    <string name="wrongFormatPassword">Password is a 9 digits word begins with Capital Letter </string>
+    <string name="existsEmail">Email already Exists! </string>
+    <string name="account_created">Created Account Successfully! </string>
+    <string name="account_failed">Failed To Create Account Please Try again! </string>
+    <string name="activation_link_sent">Activation link sent to your email, please check it out </string>
+    <string name="activation_link_failed">Failed to send Activation Email </string>
+    <string name="wait">Wait a moment </string>
+    <string name="phone_failed_to_send_code">Failed To send, please try again </string>
+    <string name="sign_in_failed">Failed to sign in </string>
+    <string name="welcome">Welcome </string>
+    <string name="Wrong_email_or_pass">Wrong Email or Password</string>
+    <string name="signout_erro">Sign out Failed!x</string>
+    <string name="please_enter_phone">Please Enter your Phone Number! </string>
+    <string name="default_phone_num">+970598894790</string>
+    <string name="email_activated_welcome_message">Hey Hey! a new member of our Family </string>
+    <string name="please_verify_Email">Please Verify Your Account By clicking on the link sent to your email</string>
+    <string name="signing_in_waiting_stmt">Signing in ....</string>
+    <string name="already_signedin">Already Signed In</string>
+    <string name="Verify_Phone_Number">Verify By Phone Number</string>
 
 </resources>

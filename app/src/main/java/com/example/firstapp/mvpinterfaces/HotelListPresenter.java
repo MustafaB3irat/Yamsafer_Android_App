@@ -1,8 +1,10 @@
 package com.example.firstapp.mvpinterfaces;
 
-public interface MainPresenter {
+public interface HotelListPresenter {
 
     void onRequestHotels();
+
+
 
 
 }

@@ -1,22 +1,18 @@
 package com.example.firstapp.models;
 
-import android.util.Log;
-
 import com.example.firstapp.interfaces.HotelApi;
-import com.example.firstapp.interfaces.Model_Presenter;
-import com.example.firstapp.mvpinterfaces.MainModel;
+import com.example.firstapp.mvpinterfaces.Model_Presenter;
+import com.example.firstapp.mvpinterfaces.HotelListModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HotelModel implements MainModel {
+public class HotelModel implements HotelListModel {
 
     //private ResponseHandler<List<Hotel>> callBack;
 

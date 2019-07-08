@@ -2,15 +2,17 @@ package com.example.firstapp.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+
 import com.example.firstapp.R;
 import com.example.firstapp.databinding.ActivationTempBinding;
 import com.example.firstapp.mvpinterfaces.signupinterfaces.EmailVerificationPresenter;
 import com.example.firstapp.mvpinterfaces.signupinterfaces.EmailVerificationView;
+import com.example.firstapp.views.fragments.HotelsListFragment;
 
 public class EmailActivationTemp extends AppCompatActivity implements EmailVerificationView {
 
@@ -27,14 +29,18 @@ public class EmailActivationTemp extends AppCompatActivity implements EmailVerif
         activity = this;
         presenter = new com.example.firstapp.Presenters.signuppresenters.EmailVerificationPresenter(this);
 
+    }
 
-        activationTempBinding.navigateToMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                presenter.checkUser();
-            }
-        });
+    @Override
+    protected void onStart() {
+        super.onStart();
 
+        onEmailVerified();
+    }
+
+    @Override
+    public void onEmailVerified() {
+        activationTempBinding.navigateToMain.setOnClickListener(view -> presenter.checkUser());
     }
 
     @Override
@@ -43,7 +49,7 @@ public class EmailActivationTemp extends AppCompatActivity implements EmailVerif
         if (state) {
             presenter.completeSignup();
         } else {
-            Toast.makeText(activity, "Please Verify Your Account ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, R.string.please_verify_Email, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -51,9 +57,9 @@ public class EmailActivationTemp extends AppCompatActivity implements EmailVerif
     public void isUserAddedToDatabase(boolean state) {
 
         if (state) {
-            Toast.makeText(activity, "Hey Hey! a new member of our Family ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, R.string.email_activated_welcome_message, Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(activity, MainActivity.class);
+            Intent intent = new Intent(activity, HotelsListFragment.class);
             startActivity(intent);
             activity.finish();
         }

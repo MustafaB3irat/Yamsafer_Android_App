@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="hotDeals"
+            type="com.example.firstapp.models.hotDealsModels.HotDealsPOJO" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/image_card"
+            android:layout_width="130dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    image_url="@{hotDeals.image_source}"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/shape"
+                    android:layout_width="70dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="30dp"
+                    android:src="@drawable/discount_shape"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="@{`UP TO` +hotDeals.discount}"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/shape"
+                    app:layout_constraintEnd_toEndOf="@+id/shape"
+                    app:layout_constraintStart_toStartOf="@+id/shape"
+                    app:layout_constraintTop_toTopOf="@+id/shape" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintStart_toEndOf="@+id/image_card"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/hotel_place"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="@{hotDeals.hotel_place}"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/hotel_title"
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:paddingRight="10dp"
+                    android:text="@{hotDeals.hotel_title}"
+                    android:textColor="@color/searchBar"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hotel_place" />
+
+                <TextView
+                    android:id="@+id/save_stmt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginTop="15dp"
+                    android:paddingRight="10dp"
+                    android:text="@{hotDeals.save_stmt}"
+
+                    android:textColor="@color/discount_shape"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/hotel_title" />
+
+
+                <Button
+                    android:layout_width="135dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/custom_button_for_hot_deals"
+                    android:text="@{` from ILS ` + hotDeals.price + ` /night `}"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/save_stmt" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.firstapp.models.Hotel;
 
 import com.example.firstapp.databinding.CardviewitemBinding;
-import com.example.firstapp.mvpinterfaces.MainView;
 import com.example.firstapp.views.DetailedHotelActivity;
-import com.example.firstapp.views.MainActivity;
 
 import java.util.List;
 

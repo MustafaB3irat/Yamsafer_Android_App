@@ -19,12 +19,6 @@ public interface SigninPresenter {
 
     FirebaseUser getCurrentUser();
 
-    void signOut();
-
-    void signOutGoogle();
-
-    void signOutFacebook();
-
     LoginManager getFacebookLoginManager();
 
     PhoneAuthProvider getPhoneProvider();
@@ -37,6 +31,13 @@ public interface SigninPresenter {
 
     CallbackManager getFacebookCallBackManager();
 
+    void initFacebookLogin();
+
     FacebookCallback<LoginResult> getFacebookLoginResult();
+
+    void checkUser(String email , String password);
+
+    void validate(String email ,String password);
+
 
 }

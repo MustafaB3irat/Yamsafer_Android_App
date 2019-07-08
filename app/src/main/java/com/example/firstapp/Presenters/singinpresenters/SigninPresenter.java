@@ -2,11 +2,10 @@ package com.example.firstapp.Presenters.singinpresenters;
 
 
 import android.text.TextUtils;
-
-import androidx.annotation.NonNull;
-
+import android.util.Log;
+import android.util.Patterns;
 import com.example.firstapp.mvpinterfaces.signininterfaces.SigninView;
-import com.example.firstapp.views.Dialogs.InternationalPhoneDialog;
+import com.example.firstapp.views.fragments.SignInFragment;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -17,24 +16,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.regex.Pattern;
+
 public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signininterfaces.SigninPresenter {
 
-    private SigninView signinView;
+    private SigninView signInFragment;
 
     //Firebase  Auth Instance
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-
     //GoogleSignInOption
     private GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
     //SignInClient
@@ -43,9 +39,9 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
     //Phone Sign in
     private PhoneAuthCredential phoneAuthCredential;
 
-    public SigninPresenter(SigninView signinView) {
-        this.signinView = signinView;
-        googleSignInClient = GoogleSignIn.getClient(signinView.getActivity(), googleSignInOptions);
+    public SigninPresenter(SignInFragment signInFragment) {
+        this.signInFragment = signInFragment;
+        googleSignInClient = GoogleSignIn.getClient(signInFragment.getActivity(), googleSignInOptions);
     }
 
 
@@ -57,43 +53,20 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
     @Override
     public void signInUser(String Email, String password) {
 
-        if (TextUtils.isEmpty(Email.trim()) || TextUtils.isEmpty(password.trim())) {
-            signinView.getSigninState(false);
-            return;
-        }
-        firebaseAuth.signInWithEmailAndPassword(Email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        firebaseAuth.signInWithEmailAndPassword(Email, password).addOnCompleteListener(task -> {
 
-                if (task.isSuccessful())
-                    signinView.getSigninState(true);
-                else signinView.getSigninState(false);
+            if (task.isSuccessful()) {
 
+                signInFragment.getSignInState(true);
+
+            } else {
+                signInFragment.wrongEmailOrPassword(true);
             }
+
+
         });
-    }
-
-
-    @Override
-    public void signOut() {
-
-        try {
-            firebaseAuth.signOut();
-            signinView.getSignOutState(true);
-        } catch (Exception e) {
-            signinView.getSignOutState(false);
-        }
 
     }
-
-    @Override
-    public void signOutGoogle() {
-        googleSignInClient.signOut();
-        firebaseAuth.getInstance().signOut();
-        signinView.getSignOutState(true);
-    }
-
-
     private LoginManager loginManager = LoginManager.getInstance();
 
 
@@ -115,15 +88,8 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
 
 
     @Override
-    public void signOutFacebook() {
-        firebaseAuth.signOut();
-        loginManager.logOut();
-        signinView.getSignOutState(true);
-    }
-
-    @Override
     public GoogleSignInAccount checkIfUserSignedInGoogle() {
-        return GoogleSignIn.getLastSignedInAccount(signinView.getActivity());
+        return GoogleSignIn.getLastSignedInAccount(signInFragment.getActivity());
     }
 
     @Override
@@ -140,6 +106,11 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
         return callbackManager;
     }
 
+    @Override
+    public void initFacebookLogin() {
+        getFacebookLoginManager().registerCallback(getFacebookCallBackManager(), getFacebookLoginResult());
+    }
+
 
     @Override
     public FacebookCallback<LoginResult> getFacebookLoginResult() {
@@ -152,41 +123,16 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
                 AccessToken accessToken = loginResult.getAccessToken();
                 handleFacebookAccessToken(accessToken);
 
-//                GraphRequest graphRequest = GraphRequest.newMeRequest(accessToken, new GraphRequest.GraphJSONObjectCallback() {
-//
-//                    @Override
-//                    public void onCompleted(JSONObject object, GraphResponse response) {
-//
-//                        try {
-//                            String name = object.getString("display_name");
-//                            String email = object.getString("email");
-//
-//
-//
-//                            signinView.getUserInfoFromFacebook(name,email,"");
-//
-//                        } catch (Exception e) {
-//
-//                        }
-//                    }
-//                });
-//
-//                Bundle bundle = new Bundle();
-//
-//                bundle.putString("fields", "display_name ,email , uid");
-//                graphRequest.setParameters(bundle);
-//                graphRequest.executeAsync();
-
             }
 
             @Override
             public void onCancel() {
 
+
             }
 
             @Override
             public void onError(FacebookException error) {
-
 
             }
         };
@@ -198,21 +144,83 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
 
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
 
+            if (task.isSuccessful()) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                signInFragment.getUserInfoFromFacebook(user.getDisplayName(), user.getEmail(), user.getUid());
+                signInFragment.getSignInState(true);
 
-                if (task.isSuccessful()) {
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    signinView.getUserInfoFromFacebook(user.getDisplayName(), user.getEmail(), user.getUid());
-                    signinView.getSigninState(true);
-                } else {
+            } else {
 
-                }
+                Log.d("Error", task.getException().getMessage());
 
             }
+
         });
+    }
+
+    @Override
+    public void checkUser(String email, String password) {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task12 -> {
+
+
+            FirebaseAuth.getInstance().getCurrentUser().reload().addOnCompleteListener(task -> {
+
+
+                signInFragment.isUserVerified(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified());
+
+                firebaseAuth.signOut();
+
+
+            });
+
+
+        });
+
+
+    }
+
+
+    @Override
+    public void validate(String email, String password) {
+
+        boolean isValid = true;
+
+        if (TextUtils.isEmpty(email)) {
+            signInFragment.emailIsEmpty(true);
+            isValid = false;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+
+            signInFragment.passwordisEmpty(true);
+
+            isValid = false;
+        }
+
+        if (!isValid) {
+            signInFragment.getSignInState(false);
+            signInFragment.isValidEmailOrPassword(isValid);
+            return;
+        }
+
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            signInFragment.wrongFormatEmail(true);
+            isValid = false;
+        }
+        if (!Pattern.compile("^[A-Z][A-Za-z0-9_\\)\\(\\*\\&\\^\\%\\$\\#@!]{9}$").matcher(password).find()) {
+
+            signInFragment.wrongFormatPassword(true);
+            isValid = false;
+        }
+
+        if (!isValid)
+            signInFragment.getSignInState(false);
+
+
+        signInFragment.isValidEmailOrPassword(isValid);
+
     }
 
 

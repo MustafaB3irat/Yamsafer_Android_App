@@ -1,4 +1,4 @@
-package com.example.firstapp.interfaces;
+package com.example.firstapp.mvpinterfaces;
 
 import com.example.firstapp.models.Hotel;
 

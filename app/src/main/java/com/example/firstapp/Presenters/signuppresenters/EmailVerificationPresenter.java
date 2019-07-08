@@ -34,38 +34,20 @@ public class EmailVerificationPresenter implements com.example.firstapp.mvpinter
 
             id = firebaseAuth.getInstance().getCurrentUser().getUid();
 
-            //reference = FirebaseDatabase.getInstance().getReference("Users").child(id);
-
             HashMap<String, String> userTupple = new HashMap<>();
 
             userTupple.put("Uid", id);
-            // userTupple.put("Name", firebaseAuth.getCurrentUser().getDisplayName());
+
             userTupple.put("Email", firebaseAuth.getInstance().getCurrentUser().getEmail());
-            //  userTupple.put("Phone" , firebaseAuth)
 
+            firebaseFirestore.collection("users").document(id).set(userTupple).addOnCompleteListener(task -> {
 
-//            reference.setValue(userTupple).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                @Override
-//                public void onComplete(@NonNull Task<Void> task) {
-//                    if (task.isSuccessful()) {
-//                        verificationView.isUserAddedToDatabase(true);
-//                    } else {
-//                        verificationView.isUserAddedToDatabase(false);
-//                    }
-//                }
-//            });
-//
-            firebaseFirestore.collection("users").document(id).set(userTupple).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
-
-                    if (task.isSuccessful()) {
-                        verificationView.isUserAddedToDatabase(true);
-                    } else {
-                        verificationView.isUserAddedToDatabase(false);
-                    }
-
+                if (task.isSuccessful()) {
+                    verificationView.isUserAddedToDatabase(true);
+                } else {
+                    verificationView.isUserAddedToDatabase(false);
                 }
+
             });
 
         }
@@ -75,14 +57,7 @@ public class EmailVerificationPresenter implements com.example.firstapp.mvpinter
 
     @Override
     public void checkUser() {
-        FirebaseAuth.getInstance().getCurrentUser().reload().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
-                verificationView.isUserVerified(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified());
-
-            }
-        });
+        FirebaseAuth.getInstance().getCurrentUser().reload().addOnCompleteListener(task -> verificationView.isUserVerified(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified()));
 
     }
 }

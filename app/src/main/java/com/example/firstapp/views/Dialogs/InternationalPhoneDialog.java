@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.firstapp.R;
 import com.example.firstapp.databinding.IntPhoneDialogBinding;
+import com.example.firstapp.views.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
@@ -53,33 +54,27 @@ public class InternationalPhoneDialog extends DialogFragment {
         builder.setView(phoneDialogBinding.getRoot());
 
 
-        phoneDialogBinding.phoneInput.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (phoneDialogBinding.phoneInput.getNumber().equals("+970598894790"))
-                    phoneDialogBinding.phoneInput.setNumber("+970000000000");
-            }
+        phoneDialogBinding.phoneInput.setOnClickListener(view -> {
+            if (phoneDialogBinding.phoneInput.getNumber().equals("+970598894790"))
+                phoneDialogBinding.phoneInput.setNumber("+970000000000");
         });
 
-        phoneDialogBinding.send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        phoneDialogBinding.send.setOnClickListener(view -> {
 
-                if (phoneDialogBinding.phoneInput.getNumber().equals("+970598894790")) {
-                    Toast.makeText(getActivity(), "Please Enter Your Phone Number", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                phoneInput = phoneDialogBinding.phoneInput;
-
-                if (phoneInput.isValid()) {
-                    phoneNum = phoneInput.getNumber();
-                }
-
-
-                signInViaPhone();
-
+            if (phoneDialogBinding.phoneInput.getNumber().equals("+970598894790")) {
+                Toast.makeText(getActivity(), R.string.please_enter_phone, Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            phoneInput = phoneDialogBinding.phoneInput;
+
+            if (phoneInput.isValid()) {
+                phoneNum = phoneInput.getNumber();
+            }
+
+
+            signInViaPhone();
+
         });
 
         phoneDialogBinding.SignIn.setOnClickListener(new View.OnClickListener() {
@@ -106,9 +101,7 @@ public class InternationalPhoneDialog extends DialogFragment {
             @Override
             public void onVerificationFailed(FirebaseException e) {
 
-                Log.d("Error", e.getMessage());
-
-                Toast.makeText(getContext(), "Failed To send, please try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.phone_failed_to_send_code, Toast.LENGTH_SHORT).show();
 
             }
 
@@ -133,20 +126,19 @@ public class InternationalPhoneDialog extends DialogFragment {
 
     private void signInWithCredintials(PhoneAuthCredential credential) {
 
-        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener(task -> {
 
-                if (task.isSuccessful()) {
+            if (task.isSuccessful()) {
 
-                    FirebaseUser user = task.getResult().getUser();
-                    Toast.makeText(getContext(), "Welcome " + user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
-                    dismiss();
-                } else {
-                    Toast.makeText(getContext(), "Failed To sign in ", Toast.LENGTH_SHORT).show();
-                }
+                FirebaseUser user = task.getResult().getUser();
+                Toast.makeText(getContext(), R.string.welcome + user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
+                dismiss();
 
+                ((MainActivity) getActivity()).getSignInState(true);
+            } else {
+                Toast.makeText(getContext(), R.string.sign_in_failed, Toast.LENGTH_SHORT).show();
             }
+
         });
     }
 

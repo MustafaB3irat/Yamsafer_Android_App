@@ -25,6 +25,10 @@ android {
         enabled = true
     }
 
+    compileOptions{
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 
@@ -51,6 +55,10 @@ dependencies {
     implementation 'net.rimoto:intlphoneinput:1.0.1'
     implementation 'com.google.firebase:firebase-database:18.0.0'
     implementation 'com.google.firebase:firebase-firestore:20.0.0'
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.facebook.fresco:fresco:2.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

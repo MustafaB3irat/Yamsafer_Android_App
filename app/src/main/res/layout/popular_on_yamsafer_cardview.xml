@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="popular"
+            type="com.example.firstapp.models.popoularOnYamsaferModels.PopoularOnYamsaferPOJO" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="200dp"
+        android:layout_height="250dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/pop_image"
+            popImageSource="@{popular.image_source}"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{popular.header}"
+            android:textColor="@color/searchBar"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/pop_image"
+            app:layout_constraintTop_toBottomOf="@+id/pop_image" />
+
+        <TextView
+            android:id="@+id/footer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@{popular.footer}"
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="@+id/header"
+            app:layout_constraintTop_toBottomOf="@+id/header" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

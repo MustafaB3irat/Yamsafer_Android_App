@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/hotel"
+        android:icon="@drawable/ic_hotel"
+        android:title="Hotel"
+        />
+
+    <item android:id="@+id/flights"
+        android:icon="@drawable/ic_flight"
+        android:title="Flights"
+
+
+        />
+    <item
+        android:title=""/>
+
+
+    <item android:id="@+id/wallet"
+        android:icon="@drawable/ic_wallet"
+        android:title="Wallet"
+        />
+
+    <item android:id="@+id/support"
+        android:icon="@drawable/ic_support"
+        android:title="Support"
+        />
+
+
+</menu>

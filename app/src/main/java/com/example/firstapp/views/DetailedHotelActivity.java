@@ -19,7 +19,7 @@ import com.example.firstapp.interfaces.CardFactory;
 import com.example.firstapp.models.Hotel;
 import com.example.firstapp.models.HotelImage;
 import com.example.firstapp.mvpinterfaces.HotelDetailPresenter;
-import com.example.firstapp.mvpinterfaces.MainView;
+import com.example.firstapp.mvpinterfaces.HotelListView;
 import com.example.firstapp.recyclerviewadapters.HotelDescAdapter;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import java.util.List;
         @BindingMethod(type = ImageView.class, attribute = "android:src", method = "setImageResource"),
         @BindingMethod(type = RatingBar.class, attribute = "android:numStars", method = "setNumStar")
 })
-public class DetailedHotelActivity extends AppCompatActivity implements MainView {
+public class DetailedHotelActivity extends AppCompatActivity implements HotelListView {
 
     private DetailedHotelBinding detailedHotelBinding;
     private HotelDescAdapter adapter;
@@ -47,25 +47,19 @@ public class DetailedHotelActivity extends AppCompatActivity implements MainView
         presenter = new com.example.firstapp.Presenters.HotelDetailPresenter(this);
         presenter.onRequestHotel();
 
-        backToHome(this);
+        backToHome();
 
 
     }
 
 
-    private void backToHome(final AppCompatActivity activity) {
+    private void backToHome() {
 
-        detailedHotelBinding.back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                finish();
-            }
-        });
+        detailedHotelBinding.back.setOnClickListener(view -> finish());
     }
 
     @Override
-    public void onHotelsRequestResponse(List<Hotel> hotels) {
+    public void getHotels(List<Hotel> hotels) {
 
         Intent intent = getIntent();
 

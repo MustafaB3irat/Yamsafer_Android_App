@@ -127,6 +127,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email_pass" />
 
+        <TextView
+            android:id="@+id/signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Already have an Account? Sign in!"
+            android:textColor="@color/link"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/sign_up"
+            app:layout_constraintStart_toStartOf="@+id/sign_up"
+            app:layout_constraintTop_toBottomOf="@+id/sign_up" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

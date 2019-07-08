@@ -1,29 +1,29 @@
 package com.example.firstapp.Presenters;
 
-import com.example.firstapp.interfaces.Model_Presenter;
+import com.example.firstapp.mvpinterfaces.Model_Presenter;
 import com.example.firstapp.models.Hotel;
 import com.example.firstapp.models.HotelModel;
-import com.example.firstapp.mvpinterfaces.MainModel;
-import com.example.firstapp.mvpinterfaces.MainView;
+import com.example.firstapp.mvpinterfaces.HotelListModel;
+import com.example.firstapp.mvpinterfaces.HotelListView;
 
 import java.util.List;
 
 
 public class HotelDetailPresenter implements com.example.firstapp.mvpinterfaces.HotelDetailPresenter {
 
-    private MainModel mainModel;
-    private MainView mainView;
+    private HotelListModel mainModel;
+    private HotelListView mainView;
 
     private Model_Presenter model_presenter = new Model_Presenter() {
         @Override
         public void getDataFromModel(List<Hotel> data) {
-            mainView.onHotelsRequestResponse(data);
+            mainView.getHotels(data);
 
         }
     };
 
 
-    public HotelDetailPresenter(MainView mainView) {
+    public HotelDetailPresenter(HotelListView mainView) {
         this.mainView = mainView;
         this.mainModel = new HotelModel();
     }

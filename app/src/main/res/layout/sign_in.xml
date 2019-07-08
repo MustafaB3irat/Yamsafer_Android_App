@@ -7,12 +7,12 @@
 
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/logo"
             android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
             app:layout_constraintBottom_toTopOf="@+id/email_pass"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
 
                     <EditText
@@ -55,6 +55,14 @@
                         android:padding="10dp"
                         android:textSize="15sp" />
 
+                    <TextView
+                        android:id="@+id/email_error"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FF4200"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -62,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
 
                     <EditText
@@ -77,6 +85,14 @@
                         android:padding="10dp"
                         android:textColor="@android:color/black"
                         android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/passowrd_error"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#FF4200"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -105,10 +121,10 @@
             android:id="@+id/signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:text="Don't have Account? Sign up"
-            android:textColor="#0645AD "
-            android:textSize="12sp"
+            android:textColor="@color/link"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/login"
             app:layout_constraintStart_toStartOf="@+id/login"
@@ -116,8 +132,8 @@
 
 
         <view
-            class='android.widget.SeekBar'
             android:id="@+id/divider"
+            class='android.widget.SeekBar'
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="17dp"
@@ -165,7 +181,7 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/facebook"
-                    android:layout_width="50dp"
+                    android:layout_width="55dp"
                     android:layout_height="70dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
@@ -173,7 +189,7 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/google"
-                    android:layout_width="50dp"
+                    android:layout_width="55dp"
                     android:layout_height="70dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
@@ -182,182 +198,18 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/phone"
-                    android:layout_width="50dp"
+                    android:layout_width="55dp"
                     android:layout_height="70dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
-                    app:srcCompat="@drawable/ic_phone"
                     android:tint="@color/gray"
-                    app:tint="#385591"/>
+                    app:srcCompat="@drawable/ic_phone"
+                    app:tint="#385591" />
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:layout_marginTop="20dp"
-            app:cardBackgroundColor="#f5f5f5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/social_media">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/hotel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="@+id/flights"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_hotel" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Hotel"
-                            android:textColor="#2854A1"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/flights"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/wallet"
-                        app:layout_constraintStart_toEndOf="@+id/hotel"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_flight" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Flights"
-                            android:textColor="#2854A1"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/wallet"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/support"
-                        app:layout_constraintStart_toEndOf="@+id/flights"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_wallet" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Wallet"
-                            android:textColor="#2854A1"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/support"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/signin"
-                        app:layout_constraintStart_toEndOf="@+id/wallet"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_support" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Support"
-                            android:textColor="#2854A1"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/signin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="15dp"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/support"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/sign_image"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/sign" />
-
-                        <TextView
-                            android:id="@+id/Sign_Text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Sign In"
-                            android:textColor="#2854A1"
-                            android:textSize="10sp"
-                            android:textStyle="bold" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
