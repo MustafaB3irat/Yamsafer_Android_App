@@ -1,6 +1,6 @@
 package com.example.firstapp.mvpinterfaces;
 
-import com.example.firstapp.models.User_Profile;
+import com.example.firstapp.models.data.UserProfile;
 
 import org.json.JSONObject;
 
@@ -11,5 +11,5 @@ public interface ActivityMainPresenter {
     void signoutFacebook();
     void signoutGoogle();
     void initUserProfile();
-    User_Profile getFacebookData(JSONObject object);
+    UserProfile getFacebookData(JSONObject object);
 }

@@ -1,5 +1,6 @@
 package com.example.firstapp.mvpinterfaces.signininterfaces;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.login.LoginManager;
@@ -35,9 +36,16 @@ public interface SigninPresenter {
 
     FacebookCallback<LoginResult> getFacebookLoginResult();
 
-    void checkUser(String email , String password);
+    void checkUser(String email, String password);
 
-    void validate(String email ,String password);
+    void validate(String email, String password);
+
+    void getSignInState(boolean isSignedIn);
+
+    void wrongEmailOrPassword(boolean isWrong);
+    void handleFacebookAccessToken(AccessToken token);
+
+    void isUserVerified(boolean isVerified);
 
 
 }

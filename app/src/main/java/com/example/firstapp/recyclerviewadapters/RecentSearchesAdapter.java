@@ -1,24 +1,22 @@
 package com.example.firstapp.recyclerviewadapters;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstapp.databinding.RecentSearchCardviewBinding;
-import com.example.firstapp.models.recentSearchsModel.RecentSearchesPOJO;
+import com.example.firstapp.models.data.RecentSearches;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class RecentSearchesAdapter extends RecyclerView.Adapter<RecentSearchesAdapter.RecentSearchesViewHolder> {
 
 
-    List<RecentSearchesPOJO> list;
+    List<RecentSearches> list;
 
-    public RecentSearchesAdapter(List<RecentSearchesPOJO> list) {
+    public RecentSearchesAdapter(List<RecentSearches> list) {
         this.list = list;
     }
 
@@ -45,7 +43,7 @@ public class RecentSearchesAdapter extends RecyclerView.Adapter<RecentSearchesAd
     @Override
     public void onBindViewHolder(@NonNull RecentSearchesViewHolder holder, int position) {
 
-        RecentSearchesPOJO recent_search = list.get(position);
+        RecentSearches recent_search = list.get(position);
 
         holder.recentSearchCardviewBinding.setRecent(recent_search);
 

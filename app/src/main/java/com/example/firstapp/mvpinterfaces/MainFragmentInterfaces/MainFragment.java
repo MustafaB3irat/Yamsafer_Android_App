@@ -1,18 +1,18 @@
 package com.example.firstapp.mvpinterfaces.MainFragmentInterfaces;
 
-import com.example.firstapp.models.hotDealsModels.HotDealsPOJO;
-import com.example.firstapp.models.popoularOnYamsaferModels.PopoularOnYamsaferPOJO;
-import com.example.firstapp.models.recentSearchsModel.RecentSearchesPOJO;
+import com.example.firstapp.models.data.HotDeals;
+import com.example.firstapp.models.data.PopoularOnYamsafer;
+import com.example.firstapp.models.data.RecentSearches;
 
 import java.util.List;
 
 public interface MainFragment {
 
-    void getRecentSearches(List<RecentSearchesPOJO> recentSearchesPOJOS);
+    void getRecentSearches(List<RecentSearches> recentSearches);
 
-    void getHotDeals(List<HotDealsPOJO> hotDealsPOJOS);
+    void getHotDeals(List<HotDeals> hotDeals);
 
-    void getPopulars(List<PopoularOnYamsaferPOJO> popoularOnYamsaferPOJOS);
+    void getPopulars(List<PopoularOnYamsafer> popoularOnYamsafers);
 
     void initSearchBar();
 

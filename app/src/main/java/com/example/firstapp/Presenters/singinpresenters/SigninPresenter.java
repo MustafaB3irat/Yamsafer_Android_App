@@ -4,6 +4,8 @@ package com.example.firstapp.Presenters.singinpresenters;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
+
+import com.example.firstapp.mvpinterfaces.signininterfaces.SigninModel;
 import com.example.firstapp.mvpinterfaces.signininterfaces.SigninView;
 import com.example.firstapp.views.fragments.SignInFragment;
 import com.facebook.AccessToken;
@@ -28,62 +30,50 @@ import java.util.regex.Pattern;
 public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signininterfaces.SigninPresenter {
 
     private SigninView signInFragment;
+    private SigninModel model;
 
-    //Firebase  Auth Instance
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
     //GoogleSignInOption
     private GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
     //SignInClient
     private GoogleSignInClient googleSignInClient;
 
-    //Phone Sign in
-    private PhoneAuthCredential phoneAuthCredential;
 
     public SigninPresenter(SignInFragment signInFragment) {
         this.signInFragment = signInFragment;
         googleSignInClient = GoogleSignIn.getClient(signInFragment.getActivity(), googleSignInOptions);
+        this.model = new com.example.firstapp.models.SigninModel(this);
+        model.getGoogleClient(googleSignInClient);
     }
 
 
     @Override
     public FirebaseUser getCurrentUser() {
-        return firebaseAuth.getCurrentUser();
+        return model.getCurrentUser();
     }
 
     @Override
     public void signInUser(String Email, String password) {
 
-        firebaseAuth.signInWithEmailAndPassword(Email, password).addOnCompleteListener(task -> {
-
-            if (task.isSuccessful()) {
-
-                signInFragment.getSignInState(true);
-
-            } else {
-                signInFragment.wrongEmailOrPassword(true);
-            }
-
-
-        });
+        model.signInUser(Email, password);
 
     }
-    private LoginManager loginManager = LoginManager.getInstance();
 
 
     @Override
     public LoginManager getFacebookLoginManager() {
-        return loginManager;
+        return model.getFacebookLoginManager();
     }
 
 
     @Override
     public PhoneAuthProvider getPhoneProvider() {
-        return PhoneAuthProvider.getInstance();
+        return model.getPhoneProvider();
     }
 
     @Override
     public FirebaseAuth getFirebaseAuth() {
-        return FirebaseAuth.getInstance();
+        return model.getFirebaseAuth();
     }
 
 
@@ -94,21 +84,18 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
 
     @Override
     public GoogleSignInClient getGoogleClient() {
-        return googleSignInClient;
+        return model.getGoogleClient();
     }
-
-    //Facebook instance
-    private CallbackManager callbackManager = CallbackManager.Factory.create();
 
 
     @Override
     public CallbackManager getFacebookCallBackManager() {
-        return callbackManager;
+        return model.getFacebookCallBackManager();
     }
 
     @Override
     public void initFacebookLogin() {
-        getFacebookLoginManager().registerCallback(getFacebookCallBackManager(), getFacebookLoginResult());
+        model.initFacebookLogin();
     }
 
 
@@ -140,14 +127,15 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
         return facebookCallback;
     }
 
-    private void handleFacebookAccessToken(AccessToken token) {
+    @Override
+    public void handleFacebookAccessToken(AccessToken token) {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
 
-        firebaseAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
+        model.getFirebaseAuth().signInWithCredential(credential).addOnCompleteListener(task -> {
 
             if (task.isSuccessful()) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
+                FirebaseUser user = model.getFirebaseAuth().getCurrentUser();
                 signInFragment.getUserInfoFromFacebook(user.getDisplayName(), user.getEmail(), user.getUid());
                 signInFragment.getSignInState(true);
 
@@ -161,23 +149,16 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
     }
 
     @Override
+    public void isUserVerified(boolean isVerified) {
+
+        signInFragment.isUserVerified(isVerified);
+
+    }
+
+    @Override
     public void checkUser(String email, String password) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task12 -> {
 
-
-            FirebaseAuth.getInstance().getCurrentUser().reload().addOnCompleteListener(task -> {
-
-
-                signInFragment.isUserVerified(FirebaseAuth.getInstance().getCurrentUser().isEmailVerified());
-
-                firebaseAuth.signOut();
-
-
-            });
-
-
-        });
-
+        model.checkUser(email, password);
 
     }
 
@@ -220,6 +201,23 @@ public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signi
 
 
         signInFragment.isValidEmailOrPassword(isValid);
+
+    }
+
+    @Override
+    public void getSignInState(boolean isSignedIn) {
+
+        if (isSignedIn)
+            signInFragment.getSignInState(true);
+
+    }
+
+    @Override
+    public void wrongEmailOrPassword(boolean isWrong) {
+
+        if (isWrong)
+            signInFragment.wrongEmailOrPassword(true);
+
 
     }
 

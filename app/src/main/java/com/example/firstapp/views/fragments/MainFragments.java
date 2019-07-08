@@ -14,10 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.firstapp.Presenters.MainPresenters;
 import com.example.firstapp.R;
 import com.example.firstapp.databinding.MainBinding;
-import com.example.firstapp.models.hotDealsModels.HotDealsPOJO;
-import com.example.firstapp.models.popoularOnYamsaferModels.PopoularOnYamsaferPOJO;
-import com.example.firstapp.models.recentSearchsModel.RecentSearchesPOJO;
-import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.MainFragment;
+import com.example.firstapp.models.data.HotDeals;
+import com.example.firstapp.models.data.PopoularOnYamsafer;
+import com.example.firstapp.models.data.RecentSearches;
 import com.example.firstapp.recyclerviewadapters.HotDealsAdapter;
 import com.example.firstapp.recyclerviewadapters.PopularOnYamsaferAdapter;
 import com.example.firstapp.recyclerviewadapters.RecentSearchesAdapter;
@@ -25,7 +24,7 @@ import com.example.firstapp.views.MainActivity;
 
 import java.util.List;
 
-public class MainFragment extends Fragment implements com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.MainFragment {
+public class MainFragments extends Fragment implements com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.MainFragment {
 
     private RecentSearchesAdapter recentSearchesAdapter;
     private HotDealsAdapter hotDealsAdapter;
@@ -58,29 +57,29 @@ public class MainFragment extends Fragment implements com.example.firstapp.mvpin
     }
 
     @Override
-    public void getRecentSearches(List<RecentSearchesPOJO> recentSearchesPOJOS) {
+    public void getRecentSearches(List<RecentSearches> recentSearches) {
 
         mainBinding.recentSearches.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recentSearchesAdapter = new RecentSearchesAdapter(recentSearchesPOJOS);
+        recentSearchesAdapter = new RecentSearchesAdapter(recentSearches);
         mainBinding.recentSearches.setAdapter(recentSearchesAdapter);
 
     }
 
     @Override
-    public void getHotDeals(List<HotDealsPOJO> hotDealsPOJOS) {
+    public void getHotDeals(List<HotDeals> hotDeals) {
 
         mainBinding.hotDeals.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        hotDealsAdapter = new HotDealsAdapter(hotDealsPOJOS);
+        hotDealsAdapter = new HotDealsAdapter(hotDeals);
         mainBinding.hotDeals.setAdapter(hotDealsAdapter);
 
     }
 
     @Override
-    public void getPopulars(List<PopoularOnYamsaferPOJO> popoularOnYamsaferPOJOS) {
+    public void getPopulars(List<PopoularOnYamsafer> popoularOnYamsafers) {
 
 
         mainBinding.popularOnYamsafer.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        popularOnYamsaferAdapter = new PopularOnYamsaferAdapter(popoularOnYamsaferPOJOS);
+        popularOnYamsaferAdapter = new PopularOnYamsaferAdapter(popoularOnYamsafers);
         mainBinding.popularOnYamsafer.setAdapter(popularOnYamsaferAdapter);
 
         mainBinding.spinnerBg.setVisibility(View.GONE);

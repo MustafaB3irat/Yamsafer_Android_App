@@ -6,7 +6,7 @@
 
         <variable
             name="recent"
-            type="com.example.firstapp.models.recentSearchsModel.RecentSearchesPOJO" />
+            type="com.example.firstapp.models.data.RecentSearches" />
     </data>
 
     <androidx.cardview.widget.CardView

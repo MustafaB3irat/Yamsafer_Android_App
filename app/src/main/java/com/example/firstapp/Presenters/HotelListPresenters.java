@@ -1,13 +1,11 @@
 package com.example.firstapp.Presenters;
 
-import com.example.firstapp.mvpinterfaces.HotelListPresenter;
 import com.example.firstapp.mvpinterfaces.Model_Presenter;
 import com.example.firstapp.mvpinterfaces.HotelListModel;
 import com.example.firstapp.mvpinterfaces.HotelListView;
-import com.example.firstapp.models.Hotel;
+import com.example.firstapp.models.data.Hotel;
 import com.example.firstapp.models.HotelModel;
 import com.example.firstapp.mvpinterfaces.MainView;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 

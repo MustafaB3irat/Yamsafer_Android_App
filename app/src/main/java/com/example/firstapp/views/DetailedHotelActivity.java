@@ -3,7 +3,6 @@ package com.example.firstapp.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 
@@ -16,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.firstapp.R;
 import com.example.firstapp.databinding.DetailedHotelBinding;
 import com.example.firstapp.interfaces.CardFactory;
-import com.example.firstapp.models.Hotel;
+import com.example.firstapp.models.data.Hotel;
 import com.example.firstapp.models.HotelImage;
 import com.example.firstapp.mvpinterfaces.HotelDetailPresenter;
 import com.example.firstapp.mvpinterfaces.HotelListView;

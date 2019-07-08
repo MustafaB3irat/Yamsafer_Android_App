@@ -1,4 +1,4 @@
-package com.example.firstapp.models;
+package com.example.firstapp.models.data;
 
 import android.widget.ImageView;
 

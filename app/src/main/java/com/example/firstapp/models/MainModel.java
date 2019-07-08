@@ -1,13 +1,11 @@
 package com.example.firstapp.models;
 
-import android.util.Log;
-
 import com.example.firstapp.interfaces.HotDealsAPI;
 import com.example.firstapp.interfaces.PopoularAPI;
 import com.example.firstapp.interfaces.RecentApi;
-import com.example.firstapp.models.hotDealsModels.HotDealsPOJO;
-import com.example.firstapp.models.popoularOnYamsaferModels.PopoularOnYamsaferPOJO;
-import com.example.firstapp.models.recentSearchsModel.RecentSearchesPOJO;
+import com.example.firstapp.models.data.HotDeals;
+import com.example.firstapp.models.data.PopoularOnYamsafer;
+import com.example.firstapp.models.data.RecentSearches;
 import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.Main_Model_Presenter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,11 +29,11 @@ public class MainModel implements com.example.firstapp.mvpinterfaces.MainFragmen
 
         RecentApi recentApi = retrofit.create(RecentApi.class);
 
-        Call<List<RecentSearchesPOJO>> call = recentApi.getRecent();
+        Call<List<RecentSearches>> call = recentApi.getRecent();
 
-        call.enqueue(new ResponseHandler<List<RecentSearchesPOJO>>() {
+        call.enqueue(new ResponseHandler<List<RecentSearches>>() {
             @Override
-            public void onResult(Boolean isSuccessful, List<RecentSearchesPOJO> result) {
+            public void onResult(Boolean isSuccessful, List<RecentSearches> result) {
 
                 if (isSuccessful) {
                     presenter.setRecentSearches(result);
@@ -52,11 +50,11 @@ public class MainModel implements com.example.firstapp.mvpinterfaces.MainFragmen
 
         HotDealsAPI hotDealsAPI = retrofit.create(HotDealsAPI.class);
 
-        Call<List<HotDealsPOJO>> call = hotDealsAPI.getHotDeals();
+        Call<List<HotDeals>> call = hotDealsAPI.getHotDeals();
 
-        call.enqueue(new ResponseHandler<List<HotDealsPOJO>>() {
+        call.enqueue(new ResponseHandler<List<HotDeals>>() {
             @Override
-            public void onResult(Boolean isSuccessful, List<HotDealsPOJO> result) {
+            public void onResult(Boolean isSuccessful, List<HotDeals> result) {
 
                 if (isSuccessful) {
                     presenter.setHotDeals(result);
@@ -73,11 +71,11 @@ public class MainModel implements com.example.firstapp.mvpinterfaces.MainFragmen
 
         PopoularAPI popoularAPI = retrofit.create(PopoularAPI.class);
 
-        Call<List<PopoularOnYamsaferPOJO>> call = popoularAPI.getPopulars();
+        Call<List<PopoularOnYamsafer>> call = popoularAPI.getPopulars();
 
-        call.enqueue(new ResponseHandler<List<PopoularOnYamsaferPOJO>>() {
+        call.enqueue(new ResponseHandler<List<PopoularOnYamsafer>>() {
             @Override
-            public void onResult(Boolean isSuccessful, List<PopoularOnYamsaferPOJO> result) {
+            public void onResult(Boolean isSuccessful, List<PopoularOnYamsafer> result) {
 
                 if (isSuccessful) {
                     presenter.setPopulars(result);

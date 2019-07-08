@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.firstapp.models.Hotel;
+import com.example.firstapp.models.data.Hotel;
 
 import com.example.firstapp.databinding.CardviewitemBinding;
 import com.example.firstapp.views.DetailedHotelActivity;

@@ -1,6 +1,7 @@
 package com.example.firstapp.models;
 
 import com.example.firstapp.interfaces.HotelApi;
+import com.example.firstapp.models.data.Hotel;
 import com.example.firstapp.mvpinterfaces.Model_Presenter;
 import com.example.firstapp.mvpinterfaces.HotelListModel;
 import com.google.gson.Gson;

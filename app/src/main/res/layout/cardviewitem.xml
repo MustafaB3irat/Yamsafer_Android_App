@@ -6,7 +6,7 @@
 
         <variable
             name="hotel"
-            type="com.example.firstapp.models.Hotel" />
+            type="com.example.firstapp.models.data.Hotel" />
 
     </data>
 

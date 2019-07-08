@@ -5,15 +5,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.firstapp.databinding.PopularOnYamsaferCardviewBinding;
-import com.example.firstapp.models.popoularOnYamsaferModels.PopoularOnYamsaferPOJO;
+import com.example.firstapp.models.data.PopoularOnYamsafer;
 import java.util.List;
 
 public class PopularOnYamsaferAdapter extends RecyclerView.Adapter<PopularOnYamsaferAdapter.PopularOnYamsaferViewHolder> {
 
 
-    private List<PopoularOnYamsaferPOJO> list;
+    private List<PopoularOnYamsafer> list;
 
-    public PopularOnYamsaferAdapter(List<PopoularOnYamsaferPOJO> list) {
+    public PopularOnYamsaferAdapter(List<PopoularOnYamsafer> list) {
         this.list = list;
     }
 
@@ -42,7 +42,7 @@ public class PopularOnYamsaferAdapter extends RecyclerView.Adapter<PopularOnYams
     @Override
     public void onBindViewHolder(@NonNull PopularOnYamsaferViewHolder holder, int position) {
 
-        PopoularOnYamsaferPOJO popoular = list.get(position);
+        PopoularOnYamsafer popoular = list.get(position);
 
         holder.popularOnYamsaferCardviewBinding.setPopular(popoular);
 

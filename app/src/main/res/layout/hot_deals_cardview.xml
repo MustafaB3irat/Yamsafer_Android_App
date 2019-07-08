@@ -6,7 +6,7 @@
 
         <variable
             name="hotDeals"
-            type="com.example.firstapp.models.hotDealsModels.HotDealsPOJO" />
+            type="com.example.firstapp.models.data.HotDeals" />
 
     </data>
 

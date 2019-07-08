@@ -21,12 +21,13 @@ import com.example.firstapp.R;
 import com.example.firstapp.databinding.ActivityMainBinding;
 import com.example.firstapp.databinding.SidebarHeaderBinding;
 import com.example.firstapp.fragmentsadapters.FragementAdpater;
-import com.example.firstapp.models.User_Profile;
+import com.example.firstapp.models.data.UserProfile;
 import com.example.firstapp.mvpinterfaces.ActivityMainPresenter;
 import com.example.firstapp.mvpinterfaces.MainView;
+import com.example.firstapp.views.fragments.ChatFragment;
 import com.example.firstapp.views.fragments.FlightsFragment;
 import com.example.firstapp.views.fragments.HotelsListFragment;
-import com.example.firstapp.views.fragments.MainFragment;
+import com.example.firstapp.views.fragments.MainFragments;
 import com.example.firstapp.views.fragments.SignInFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -75,10 +76,11 @@ public class MainActivity extends AppCompatActivity implements MainView {
     @Override
     public void initFragments() {
         fragementAdpater = new FragementAdpater(getSupportFragmentManager());
-        fragementAdpater.addFragment(new MainFragment());
+        fragementAdpater.addFragment(new MainFragments());
         fragementAdpater.addFragment(new HotelsListFragment());
         fragementAdpater.addFragment(new SignInFragment());
         fragementAdpater.addFragment(new FlightsFragment());
+        fragementAdpater.addFragment(new ChatFragment());
         activityMainBinding.fragments.setAdapter(fragementAdpater);
 
 
@@ -95,6 +97,8 @@ public class MainActivity extends AppCompatActivity implements MainView {
                     activityMainBinding.fragments.setCurrentItem(0, true);
                 }
                 break;
+
+
                 case R.id.flights: {
 
                     activityMainBinding.fragments.setCurrentItem(3, true);
@@ -194,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Override
-    public void getUserProfile(User_Profile user_profile) {
+    public void getUserProfile(UserProfile user_profile) {
 
         try {
             ((TextView) sidebar_header.findViewById(R.id.email_address)).setText(user_profile.getEmail());
@@ -202,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
             //((ProfilePictureView) sidebar_header.findViewById(R.id.profile_pic)).setProfileId(user_profile.getId());
 
             // Bitmap mIcon = BitmapFactory.decodeStream(new URL(user_profile.getImage_url()).openConnection().getInputStream());
-            Glide.with((sidebar_header.findViewById(R.id.profile_pic)).getContext()).load(user_profile.getImage_url()).into(((CircleImageView) sidebar_header.findViewById(R.id.profile_pic)));
+            Glide.with((sidebar_header.findViewById(R.id.profile_pic)).getContext()).load(user_profile.getAvatar()).into(((CircleImageView) sidebar_header.findViewById(R.id.profile_pic)));
         } catch (Exception e) {
 
         }
@@ -239,6 +243,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
                 presenter.signout();
                 switchFragmentsById(R.id.signin);
                 activityMainBinding.drawer.closeDrawer(GravityCompat.START);
+
+            }
+            break;
+
+            case R.id.chat: {
+
+                activityMainBinding.drawer.closeDrawer(GravityCompat.START);
+                activityMainBinding.fragments.setCurrentItem(4);
 
             }
             break;

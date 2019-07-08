@@ -19,7 +19,7 @@ import com.example.firstapp.Presenters.HotelListPresenters;
 import com.example.firstapp.databinding.HotelsListBinding;
 import com.example.firstapp.mvpinterfaces.HotelListPresenter;
 import com.example.firstapp.mvpinterfaces.HotelListView;
-import com.example.firstapp.models.Hotel;
+import com.example.firstapp.models.data.Hotel;
 import com.example.firstapp.recyclerviewadapters.HotelsListAdapter;
 import com.example.firstapp.R;
 

@@ -2,11 +2,10 @@ package com.example.firstapp.Presenters;
 
 import android.util.Log;
 
-import com.example.firstapp.models.User_Profile;
+import com.example.firstapp.models.data.UserProfile;
 import com.example.firstapp.views.MainActivity;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -89,11 +88,11 @@ public class ActivityMainPresenter implements com.example.firstapp.mvpinterfaces
         } else if (GoogleSignIn.getLastSignedInAccount(activity) != null) {
 
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(activity);
-            activity.getUserProfile(new User_Profile(acct.getDisplayName(), acct.getEmail(), acct.getPhotoUrl().toString(), ""));
+            activity.getUserProfile(new UserProfile(acct.getDisplayName(), acct.getEmail(), acct.getPhotoUrl().toString(), ""));
         } else {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            activity.getUserProfile(new User_Profile(user.getEmail(), "", "", ""));
+            activity.getUserProfile(new UserProfile(user.getEmail(), "", "", ""));
         }
 
 
@@ -101,9 +100,9 @@ public class ActivityMainPresenter implements com.example.firstapp.mvpinterfaces
 
 
     @Override
-    public User_Profile getFacebookData(JSONObject object) {
+    public UserProfile getFacebookData(JSONObject object) {
 
-        User_Profile user_profile = new User_Profile();
+        UserProfile user_profile = new UserProfile();
 
         try {
 
@@ -112,7 +111,7 @@ public class ActivityMainPresenter implements com.example.firstapp.mvpinterfaces
             try {
                 profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?type=large");
 
-                user_profile.setImage_url(profile_pic.toString());
+                user_profile.setAvatar(profile_pic.toString());
 
                 user_profile.setName(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 

@@ -1,6 +1,8 @@
 package com.example.firstapp.models;
 
 
+import com.example.firstapp.models.data.Hotel;
+
 import java.util.List;
 
 import retrofit2.Call;

@@ -1,4 +1,4 @@
-package com.example.firstapp.models.hotDealsModels;
+package com.example.firstapp.models.data;
 
 import android.widget.ImageView;
 
@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class HotDealsPOJO implements Serializable {
+public class HotDeals implements Serializable {
 
     @SerializedName("image_source")
     private String image_source;
@@ -29,7 +29,7 @@ public class HotDealsPOJO implements Serializable {
     @SerializedName("price")
     private String price;
 
-    public HotDealsPOJO(String image_source, String discount, String hotel_place, String hotel_title, String save_stmt, String price) {
+    public HotDeals(String image_source, String discount, String hotel_place, String hotel_title, String save_stmt, String price) {
         this.image_source = image_source;
         this.discount = discount;
         this.hotel_place = hotel_place;

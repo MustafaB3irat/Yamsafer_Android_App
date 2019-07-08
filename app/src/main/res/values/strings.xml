@@ -38,5 +38,6 @@
     <string name="signing_in_waiting_stmt">Signing in ....</string>
     <string name="already_signedin">Already Signed In</string>
     <string name="Verify_Phone_Number">Verify By Phone Number</string>
+    <string name="chat_edit_text">Enter your friend\'s name </string>
 
 </resources>

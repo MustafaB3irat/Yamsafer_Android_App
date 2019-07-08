@@ -1,4 +1,4 @@
-package com.example.firstapp.models.popoularOnYamsaferModels;
+package com.example.firstapp.models.data;
 
 import android.widget.ImageView;
 
@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class PopoularOnYamsaferPOJO implements Serializable {
+public class PopoularOnYamsafer implements Serializable {
 
 
     @SerializedName("image_source")
@@ -23,7 +23,7 @@ public class PopoularOnYamsaferPOJO implements Serializable {
     private String footer;
 
 
-    public PopoularOnYamsaferPOJO(String image_source, String header, String footer) {
+    public PopoularOnYamsafer(String image_source, String header, String footer) {
         this.image_source = image_source;
         this.header = header;
         this.footer = footer;

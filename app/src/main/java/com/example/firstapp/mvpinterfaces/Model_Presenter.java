@@ -1,6 +1,6 @@
 package com.example.firstapp.mvpinterfaces;
 
-import com.example.firstapp.models.Hotel;
+import com.example.firstapp.models.data.Hotel;
 
 import java.util.List;
 

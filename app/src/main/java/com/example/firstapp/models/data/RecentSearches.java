@@ -1,4 +1,4 @@
-package com.example.firstapp.models.recentSearchsModel;
+package com.example.firstapp.models.data;
 
 import android.widget.ImageView;
 
@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class RecentSearchesPOJO implements Serializable {
+public class RecentSearches implements Serializable {
 
     @SerializedName("image_source")
     private String image_source;
@@ -25,7 +25,7 @@ public class RecentSearchesPOJO implements Serializable {
     private String numOfGuest;
 
 
-    public RecentSearchesPOJO(String image_source, String search_place, String from_to, String numOfGuest) {
+    public RecentSearches(String image_source, String search_place, String from_to, String numOfGuest) {
         this.image_source = image_source;
         this.search_place = search_place;
         this.from_to = from_to;

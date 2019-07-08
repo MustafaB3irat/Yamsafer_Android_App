@@ -1,8 +1,6 @@
 package com.example.firstapp.mvpinterfaces;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.firstapp.models.Hotel;
+import com.example.firstapp.models.data.Hotel;
 
 import java.util.List;
 

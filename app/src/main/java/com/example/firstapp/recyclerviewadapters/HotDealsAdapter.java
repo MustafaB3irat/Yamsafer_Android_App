@@ -7,15 +7,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.firstapp.databinding.HotDealsCardviewBinding;
-import com.example.firstapp.models.hotDealsModels.HotDealsPOJO;
+import com.example.firstapp.models.data.HotDeals;
 
 import java.util.List;
 
 public class HotDealsAdapter extends RecyclerView.Adapter<HotDealsAdapter.HotDealsViewHolder> {
 
-    private List<HotDealsPOJO> list;
+    private List<HotDeals> list;
 
-    public HotDealsAdapter(List<HotDealsPOJO> list) {
+    public HotDealsAdapter(List<HotDeals> list) {
         this.list = list;
     }
 
@@ -45,9 +45,9 @@ public class HotDealsAdapter extends RecyclerView.Adapter<HotDealsAdapter.HotDea
     @Override
     public void onBindViewHolder(@NonNull HotDealsViewHolder holder, int position) {
 
-        HotDealsPOJO hotDealsPOJO = list.get(position);
+        HotDeals hotDeals = list.get(position);
 
-        holder.hotDealsCardviewBinding.setHotDeals(hotDealsPOJO);
+        holder.hotDealsCardviewBinding.setHotDeals(hotDeals);
 
     }
 
