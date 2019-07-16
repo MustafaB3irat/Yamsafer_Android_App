@@ -4,19 +4,18 @@ import android.app.ProgressDialog;
 import android.text.TextUtils;
 import android.util.Patterns;
 
-import com.example.firstapp.mvpinterfaces.signupinterfaces.SignUpModel;
-import com.example.firstapp.mvpinterfaces.signupinterfaces.SignUpView;
+import com.example.firstapp.mvpinterfaces.signupinterfaces.Signup;
 
 import java.util.regex.Pattern;
 
-public class SignUpPresenter implements com.example.firstapp.mvpinterfaces.signupinterfaces.SignUpPresenter {
+public class SignUpPresenter implements Signup.SignUpPresenter {
 
 
-    private SignUpView signUpView;
-    private SignUpModel signUpModel;
+    private Signup.SignUpView signUpView;
+    private Signup.SignUpModel signUpModel;
 
 
-    public SignUpPresenter(SignUpView signUpView) {
+    public SignUpPresenter(Signup.SignUpView signUpView) {
         this.signUpModel = new com.example.firstapp.models.SignUpModel(this);
         this.signUpView = signUpView;
 

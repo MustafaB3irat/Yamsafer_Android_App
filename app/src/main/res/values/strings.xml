@@ -39,5 +39,12 @@
     <string name="already_signedin">Already Signed In</string>
     <string name="Verify_Phone_Number">Verify By Phone Number</string>
     <string name="chat_edit_text">Enter your friend\'s name </string>
+    <string name="tpyeMessage">Type a message</string>
+    <string name="chat_message_failed">Failed to send Message! please try again</string>
+    <string name="channel_name">default Channel name</string>
+    <string name="channel_description">Default</string>
+    <string name="permissionAlreadyGranted">You have already granted this permission!</string>
+    <string name="permissionGranted">Permission Granted</string>
+    <string name="permissionDenied">Permission Denied</string>
 
 </resources>

@@ -17,6 +17,7 @@ import com.example.firstapp.databinding.MainBinding;
 import com.example.firstapp.models.data.HotDeals;
 import com.example.firstapp.models.data.PopoularOnYamsafer;
 import com.example.firstapp.models.data.RecentSearches;
+import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.Main;
 import com.example.firstapp.recyclerviewadapters.HotDealsAdapter;
 import com.example.firstapp.recyclerviewadapters.PopularOnYamsaferAdapter;
 import com.example.firstapp.recyclerviewadapters.RecentSearchesAdapter;
@@ -24,13 +25,13 @@ import com.example.firstapp.views.MainActivity;
 
 import java.util.List;
 
-public class MainFragments extends Fragment implements com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.MainFragment {
+public class MainFragments extends Fragment implements Main.MainFragment {
 
     private RecentSearchesAdapter recentSearchesAdapter;
     private HotDealsAdapter hotDealsAdapter;
     private PopularOnYamsaferAdapter popularOnYamsaferAdapter;
     private MainBinding mainBinding;
-    private com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.MainPresenter presenter;
+    private Main.MainPresenter presenter;
 
     @Nullable
     @Override

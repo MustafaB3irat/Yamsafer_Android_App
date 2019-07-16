@@ -17,8 +17,7 @@ import android.widget.RatingBar;
 
 import com.example.firstapp.Presenters.HotelListPresenters;
 import com.example.firstapp.databinding.HotelsListBinding;
-import com.example.firstapp.mvpinterfaces.HotelListPresenter;
-import com.example.firstapp.mvpinterfaces.HotelListView;
+import com.example.firstapp.mvpinterfaces.HotelList;
 import com.example.firstapp.models.data.Hotel;
 import com.example.firstapp.recyclerviewadapters.HotelsListAdapter;
 import com.example.firstapp.R;
@@ -30,12 +29,12 @@ import java.util.List;
         @BindingMethod(type = ImageView.class, attribute = "android:src", method = "setImageResource"),
         @BindingMethod(type = RatingBar.class, attribute = "android:numStars", method = "setNumStar")
 })
-public class HotelsListFragment extends Fragment implements HotelListView {
+public class HotelsListFragment extends Fragment implements HotelList.HotelListView {
 
 
     private androidx.recyclerview.widget.RecyclerView.Adapter adapter;
     private HotelsListBinding hotelsListBinding;
-    private HotelListPresenter presenter;
+    private HotelList.HotelListPresenter presenter;
 
     @Nullable
     @Override

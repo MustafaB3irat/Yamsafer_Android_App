@@ -1,7 +1,7 @@
 package com.example.firstapp.views.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +16,15 @@ import com.example.firstapp.R;
 import com.example.firstapp.customListeners.MyTextWatcher;
 import com.example.firstapp.databinding.ChatUsersBinding;
 import com.example.firstapp.models.data.UserProfile;
-import com.example.firstapp.mvpinterfaces.chat.ChatUsersPresenter;
+import com.example.firstapp.mvpinterfaces.chat.SearchUser;
 import com.example.firstapp.recyclerviewadapters.ChatUsersAdapter;
+import com.example.firstapp.views.MainActivity;
 
 import java.util.List;
 
-public class ChatFragment extends Fragment implements com.example.firstapp.mvpinterfaces.chat.ChatFragment {
+public class SearchUsersFragment extends Fragment implements SearchUser.SearchUsersFragment {
 
-    private ChatUsersPresenter presenter;
+    private SearchUser.SearchUsersPresenter presenter;
     private ChatUsersBinding chatUsersBinding;
     private ChatUsersAdapter adapter;
 
@@ -42,7 +43,7 @@ public class ChatFragment extends Fragment implements com.example.firstapp.mvpin
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter = new com.example.firstapp.Presenters.chat.ChatUsersPresenter(this);
+        presenter = new com.example.firstapp.Presenters.SearchUsersPresenter(this);
         initSearchEditText();
 
     }
@@ -50,7 +51,7 @@ public class ChatFragment extends Fragment implements com.example.firstapp.mvpin
     @Override
     public void getContacts(List<UserProfile> contacts) {
         chatUsersBinding.chatMain.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new ChatUsersAdapter(contacts);
+        adapter = new ChatUsersAdapter(contacts, ((MainActivity) getActivity()));
 
         chatUsersBinding.watermarkYamsafer.setVisibility(View.GONE);
         chatUsersBinding.watermarkText.setVisibility(View.GONE);
@@ -62,7 +63,20 @@ public class ChatFragment extends Fragment implements com.example.firstapp.mvpin
     @Override
     public void initSearchEditText() {
         chatUsersBinding.searchUser.addTextChangedListener(new MyTextWatcher(() -> {
-            presenter.getContactsByName(chatUsersBinding.searchUser.getText().toString());
+
+            if (chatUsersBinding.chatMain.getAdapter() != null) {
+
+                ((ChatUsersAdapter) chatUsersBinding.chatMain.getAdapter()).clearList();
+                chatUsersBinding.chatMain.getAdapter().notifyDataSetChanged();
+            }
+
+            if (!TextUtils.isEmpty(chatUsersBinding.searchUser.getText()))
+                presenter.getContactsByName(chatUsersBinding.searchUser.getText().toString());
+
+            else {
+                chatUsersBinding.watermarkYamsafer.setVisibility(View.VISIBLE);
+                chatUsersBinding.watermarkText.setVisibility(View.VISIBLE);
+            }
         }));
 
     }

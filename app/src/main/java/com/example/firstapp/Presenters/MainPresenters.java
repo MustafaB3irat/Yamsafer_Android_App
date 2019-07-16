@@ -2,19 +2,18 @@ package com.example.firstapp.Presenters;
 
 import com.example.firstapp.models.data.HotDeals;
 import com.example.firstapp.models.data.PopoularOnYamsafer;
+import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.Main;
 import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.Main_Model_Presenter;
 import com.example.firstapp.models.data.RecentSearches;
-import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.MainFragment;
-import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.MainModel;
 
 import java.util.List;
 
-public class MainPresenters implements com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.MainPresenter {
+public class MainPresenters implements Main.MainPresenter {
 
-    private MainFragment fragment;
-    private MainModel mainModel;
+    private Main.MainFragment fragment;
+    private Main.MainModel mainModel;
 
-    public MainPresenters(MainFragment fragment) {
+    public MainPresenters(Main.MainFragment fragment) {
         this.fragment = fragment;
         mainModel = new com.example.firstapp.models.MainModel();
     }

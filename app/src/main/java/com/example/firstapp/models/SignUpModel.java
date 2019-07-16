@@ -2,20 +2,22 @@ package com.example.firstapp.models;
 
 import android.app.ProgressDialog;
 
-import com.example.firstapp.mvpinterfaces.signupinterfaces.SignUpPresenter;
+import com.example.firstapp.mvpinterfaces.signupinterfaces.Signup;
+import com.example.firstapp.views.SignUpActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
-public class SignUpModel implements com.example.firstapp.mvpinterfaces.signupinterfaces.SignUpModel {
+public class SignUpModel implements Signup.SignUpModel {
 
 
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
-    private SignUpPresenter presenter;
+    private Signup.SignUpPresenter presenter;
 
     public SignUpModel(com.example.firstapp.Presenters.signuppresenters.SignUpPresenter presenter) {
 
@@ -50,7 +52,7 @@ public class SignUpModel implements com.example.firstapp.mvpinterfaces.signupint
             if (currentUser.getPhotoUrl() != null) {
                 userTupple.put("avatar", currentUser.getPhotoUrl().toString());
             } else {
-                userTupple.put("avatar", "default");
+                userTupple.put("avatar", "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png");
             }
 
 
@@ -114,7 +116,7 @@ public class SignUpModel implements com.example.firstapp.mvpinterfaces.signupint
             });
 
         } else {
-            
+
             progressDialog.dismiss();
         }
 

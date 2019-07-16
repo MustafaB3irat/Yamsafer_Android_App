@@ -6,6 +6,7 @@ import com.example.firstapp.interfaces.RecentApi;
 import com.example.firstapp.models.data.HotDeals;
 import com.example.firstapp.models.data.PopoularOnYamsafer;
 import com.example.firstapp.models.data.RecentSearches;
+import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.Main;
 import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.Main_Model_Presenter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -16,7 +17,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainModel implements com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.MainModel {
+public class MainModel implements Main.MainModel {
 
 
     private Gson gson = new GsonBuilder().setLenient().create();

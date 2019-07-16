@@ -7,6 +7,8 @@ import com.google.android.material.navigation.NavigationView;
 
 public interface MainView  extends NavigationView.OnNavigationItemSelectedListener {
 
+
+
     void initFragments();
     void fragmentSwitcher();
     void setSearchEditTextClickable(EditText editText);

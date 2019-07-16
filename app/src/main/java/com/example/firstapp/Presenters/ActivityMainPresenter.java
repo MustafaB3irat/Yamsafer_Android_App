@@ -88,11 +88,11 @@ public class ActivityMainPresenter implements com.example.firstapp.mvpinterfaces
         } else if (GoogleSignIn.getLastSignedInAccount(activity) != null) {
 
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(activity);
-            activity.getUserProfile(new UserProfile(acct.getDisplayName(), acct.getEmail(), acct.getPhotoUrl().toString(), ""));
+            activity.getUserProfile(new UserProfile(acct.getDisplayName(), acct.getEmail(), acct.getPhotoUrl().toString(), "" , null));
         } else {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            activity.getUserProfile(new UserProfile(user.getEmail(), "", "", ""));
+            activity.getUserProfile(new UserProfile(user.getEmail(), "", "", "" , null));
         }
 
 

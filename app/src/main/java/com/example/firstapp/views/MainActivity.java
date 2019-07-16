@@ -2,6 +2,7 @@ package com.example.firstapp.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -24,7 +26,7 @@ import com.example.firstapp.fragmentsadapters.FragementAdpater;
 import com.example.firstapp.models.data.UserProfile;
 import com.example.firstapp.mvpinterfaces.ActivityMainPresenter;
 import com.example.firstapp.mvpinterfaces.MainView;
-import com.example.firstapp.views.fragments.ChatFragment;
+import com.example.firstapp.views.fragments.SearchUsersFragment;
 import com.example.firstapp.views.fragments.FlightsFragment;
 import com.example.firstapp.views.fragments.HotelsListFragment;
 import com.example.firstapp.views.fragments.MainFragments;
@@ -47,13 +49,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
         activityMainBinding.nav.inflateMenu(R.menu.bottom_nav);
         sidebar_header = activityMainBinding.sidebar.inflateHeaderView(R.layout.sidebar_header);
 
-
-    }
-
-
-    @Override
-    protected void onStart() {
-
         presenter = new com.example.firstapp.Presenters.ActivityMainPresenter(this);
 
         checkIfExtrasFromSignUpActivityExists();
@@ -62,16 +57,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         initSideBar();
 
-        super.onStart();
-
-
         initFragments();
-
 
         fragmentSwitcher();
 
 
     }
+
 
     @Override
     public void initFragments() {
@@ -80,8 +72,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
         fragementAdpater.addFragment(new HotelsListFragment());
         fragementAdpater.addFragment(new SignInFragment());
         fragementAdpater.addFragment(new FlightsFragment());
-        fragementAdpater.addFragment(new ChatFragment());
+        fragementAdpater.addFragment(new SearchUsersFragment());
         activityMainBinding.fragments.setAdapter(fragementAdpater);
+
+        activityMainBinding.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
 
     }
@@ -154,6 +148,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
             }
             break;
 
+            case R.id.chat: {
+                activityMainBinding.fragments.setCurrentItem(4);
+            }
+
         }
     }
 
@@ -163,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         if (presenter.isUserSignedIn()) {
 
             activityMainBinding.sidebar.setVisibility(View.VISIBLE);
+            activityMainBinding.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
             activityMainBinding.drawer.openDrawer(GravityCompat.START);
             presenter.initUserProfile();
         } else {
@@ -176,7 +175,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         if (isSignedOut) {
             activityMainBinding.drawer.closeDrawer(GravityCompat.START);
+            activityMainBinding.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
             activityMainBinding.fragments.setCurrentItem(2);
+
         } else {
             Toast.makeText(this, R.string.signout_erro, Toast.LENGTH_SHORT).show();
         }
@@ -216,6 +217,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag("android:switcher:" + activityMainBinding.fragments.getId() + ":" + activityMainBinding.fragments.getCurrentItem());
         fragment.onActivityResult(requestCode, resultCode, data);
@@ -250,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
             case R.id.chat: {
 
                 activityMainBinding.drawer.closeDrawer(GravityCompat.START);
-                activityMainBinding.fragments.setCurrentItem(4);
+                switchFragmentsById(R.id.chat);
 
             }
             break;
@@ -260,4 +262,5 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         return true;
     }
+
 }

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#e6e6e6e6">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/searchBar"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="8dp"
+                    android:scaleType="centerCrop" />
+
+                <TextView
+                    android:layout_marginStart="30dp"
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messages_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/HorizentalSeperator"
+            app:layout_constraintTop_toBottomOf="@+id/appBar">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/HorizentalSeperator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:srcCompat="@drawable/seperator"
+            app:layout_constraintBottom_toTopOf="@+id/image_Uploaded"
+            android:layout_marginBottom="7dp"
+            android:tint="@color/searchBar"/>
+
+
+        <ImageView
+            android:id="@+id/image_Uploaded"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="@+id/HorizentalSeperator"
+            app:layout_constraintBottom_toTopOf="@id/message_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="5dp"
+            android:visibility="gone"/>
+
+
+        <ImageButton
+            android:id="@+id/send_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_send"
+            android:tint="@color/searchBar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/upload_image"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:layout_constraintEnd_toStartOf="@+id/message_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/message_text"
+            app:layout_constraintBottom_toBottomOf="@+id/message_text"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            app:srcCompat="@drawable/ic_upload_image"
+            android:tint="@color/searchBar"/>
+
+
+        <EditText
+            android:id="@+id/message_text"
+            android:layout_width="0dp"
+            android:maxHeight="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:hint="@string/tpyeMessage"
+            android:textColor="@color/searchBar"
+            android:textColorHint="@color/searchBar"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@id/send_message"
+            app:layout_constraintEnd_toStartOf="@+id/send_message"
+            app:layout_constraintStart_toEndOf="@+id/upload_image"
+            app:layout_constraintTop_toTopOf="@id/send_message"
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

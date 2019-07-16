@@ -5,8 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 
-import com.example.firstapp.mvpinterfaces.signininterfaces.SigninModel;
-import com.example.firstapp.mvpinterfaces.signininterfaces.SigninView;
+import com.example.firstapp.mvpinterfaces.signininterfaces.Signin;
 import com.example.firstapp.views.fragments.SignInFragment;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -22,15 +21,14 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.regex.Pattern;
 
-public class SigninPresenter implements com.example.firstapp.mvpinterfaces.signininterfaces.SigninPresenter {
+public class SigninPresenter implements Signin.SigninPresenter {
 
-    private SigninView signInFragment;
-    private SigninModel model;
+    private Signin.SigninView signInFragment;
+    private Signin.SigninModel model;
 
 
     //GoogleSignInOption

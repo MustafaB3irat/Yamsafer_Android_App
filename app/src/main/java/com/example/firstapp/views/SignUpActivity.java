@@ -3,8 +3,6 @@ package com.example.firstapp.views;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Patterns;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -14,15 +12,12 @@ import androidx.databinding.DataBindingUtil;
 import com.example.firstapp.R;
 import com.example.firstapp.customListeners.MyTextWatcher;
 import com.example.firstapp.databinding.SignUpBinding;
-import com.example.firstapp.mvpinterfaces.signupinterfaces.SignUpPresenter;
-import com.example.firstapp.mvpinterfaces.signupinterfaces.SignUpView;
+import com.example.firstapp.mvpinterfaces.signupinterfaces.Signup;
 
-import java.util.regex.Pattern;
-
-public class SignUpActivity extends AppCompatActivity implements SignUpView {
+public class SignUpActivity extends AppCompatActivity implements Signup.SignUpView {
 
     private SignUpBinding signUpBinding;
-    private SignUpPresenter signUpPresenter;
+    private Signup.SignUpPresenter signUpPresenter;
     private ProgressDialog progressDialog;
 
 
@@ -158,7 +153,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpView {
     public void isUserAddedToDatabase(boolean isAdded) {
 
         if (isAdded) {
-            Toast.makeText(this, R.string.email_activated_welcome_message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.email_activated_welcome_message), Toast.LENGTH_SHORT).show();
         }
 
     }

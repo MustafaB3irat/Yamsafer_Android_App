@@ -16,8 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.firstapp.R;
 import com.example.firstapp.customListeners.MyTextWatcher;
 import com.example.firstapp.databinding.SignInBinding;
-import com.example.firstapp.mvpinterfaces.signininterfaces.SigninPresenter;
-import com.example.firstapp.mvpinterfaces.signininterfaces.SigninView;
+import com.example.firstapp.mvpinterfaces.signininterfaces.Signin;
 import com.example.firstapp.views.Dialogs.InternationalPhoneDialog;
 import com.example.firstapp.views.MainActivity;
 import com.example.firstapp.views.SignUpActivity;
@@ -28,10 +27,10 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Arrays;
 
-public class SignInFragment extends Fragment implements SigninView {
+public class SignInFragment extends Fragment implements Signin.SigninView {
 
     private SignInBinding signInBinding;
-    private SigninPresenter presenter;
+    private Signin.SigninPresenter presenter;
     private ProgressDialog progressDialog;
     private LoginButton loginButton;
 
@@ -114,7 +113,7 @@ public class SignInFragment extends Fragment implements SigninView {
     @Override
     public void getUserInfoFromFacebook(String name, String email, String id) {
 
-        Toast.makeText(getContext(), R.string.welcome + name, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), getContext().getString(R.string.welcome) +" "+ name, Toast.LENGTH_SHORT).show();
 
     }
 
@@ -160,7 +159,7 @@ public class SignInFragment extends Fragment implements SigninView {
 
             GoogleSignInAccount account = completedTask.getResult();
 //            ((MainActivity) getActivity()).activityMainBinding.hotel.performClick();
-            Toast.makeText(getContext(), R.string.welcome + account.getDisplayName(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getContext().getString(R.string.welcome) + account.getDisplayName(), Toast.LENGTH_SHORT).show();
 
             getSignInState(true);
 

@@ -5,17 +5,32 @@ import android.widget.ImageView;
 import androidx.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
+import com.example.firstapp.R;
+import com.google.firebase.firestore.PropertyName;
 
 public class UserProfile {
 
 
     private String name, email, avatar, id;
 
-    public UserProfile(String name, String email, String image_url, String id) {
+    @PropertyName("tokenid")
+    private String tokenId;
+
+    public UserProfile(String name, String email, String avatar, String id, String tokenId) {
         this.name = name;
         this.email = email;
-        this.avatar = image_url;
+        this.avatar = avatar;
         this.id = id;
+        this.tokenId = tokenId;
+    }
+
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
     }
 
     public String getId() {
@@ -54,10 +69,14 @@ public class UserProfile {
     }
 
 
-    @BindingAdapter("profile_image")
+    @BindingAdapter("avatar")
     public static void load(ImageView view, String URL) {
 
-        Glide.with(view.getContext()).load(URL).into(view);
+        if (URL.equals("default"))
+            view.setImageResource(R.drawable.default_avatar);
+
+        else
+            Glide.with(view.getContext()).load(URL).into(view);
 
     }
 }

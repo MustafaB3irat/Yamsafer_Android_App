@@ -2,8 +2,8 @@ package com.example.firstapp.models;
 
 import com.example.firstapp.interfaces.HotelApi;
 import com.example.firstapp.models.data.Hotel;
+import com.example.firstapp.mvpinterfaces.HotelList;
 import com.example.firstapp.mvpinterfaces.Model_Presenter;
-import com.example.firstapp.mvpinterfaces.HotelListModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HotelModel implements HotelListModel {
+public class HotelModel implements HotelList.HotelListModel {
 
     //private ResponseHandler<List<Hotel>> callBack;
 

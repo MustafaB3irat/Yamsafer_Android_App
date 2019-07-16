@@ -13,15 +13,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".views.fragments.HotelsListFragment">
+            tools:context=".views.fragments.HotelsListFragment"
+            android:background="@android:color/white">
 
             <com.example.firstapp.customComponents.NonSwipeableViewPager
                 android:id="@+id/fragments"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="0dp"
-                android:layout_marginBottom="5dp"
-                app:layout_constraintBottom_toTopOf="@+id/signin"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,6 @@
                 android:id="@+id/signin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
                 android:backgroundTint="@color/signInIcon"
                 android:src="@drawable/ic_signin"
                 app:borderWidth="0dp"
@@ -60,6 +59,7 @@
 
 
         <com.google.android.material.navigation.NavigationView
+            android:background="@color/white"
             android:id="@+id/sidebar"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

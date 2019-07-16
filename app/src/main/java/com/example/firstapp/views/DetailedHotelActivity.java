@@ -18,7 +18,7 @@ import com.example.firstapp.interfaces.CardFactory;
 import com.example.firstapp.models.data.Hotel;
 import com.example.firstapp.models.HotelImage;
 import com.example.firstapp.mvpinterfaces.HotelDetailPresenter;
-import com.example.firstapp.mvpinterfaces.HotelListView;
+import com.example.firstapp.mvpinterfaces.HotelList;
 import com.example.firstapp.recyclerviewadapters.HotelDescAdapter;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import java.util.List;
         @BindingMethod(type = ImageView.class, attribute = "android:src", method = "setImageResource"),
         @BindingMethod(type = RatingBar.class, attribute = "android:numStars", method = "setNumStar")
 })
-public class DetailedHotelActivity extends AppCompatActivity implements HotelListView {
+public class DetailedHotelActivity extends AppCompatActivity implements HotelList.HotelListView {
 
     private DetailedHotelBinding detailedHotelBinding;
     private HotelDescAdapter adapter;

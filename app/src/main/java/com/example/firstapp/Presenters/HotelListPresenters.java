@@ -1,18 +1,17 @@
 package com.example.firstapp.Presenters;
 
+import com.example.firstapp.mvpinterfaces.HotelList;
 import com.example.firstapp.mvpinterfaces.Model_Presenter;
-import com.example.firstapp.mvpinterfaces.HotelListModel;
-import com.example.firstapp.mvpinterfaces.HotelListView;
 import com.example.firstapp.models.data.Hotel;
 import com.example.firstapp.models.HotelModel;
 import com.example.firstapp.mvpinterfaces.MainView;
 
 import java.util.List;
 
-public class HotelListPresenters implements com.example.firstapp.mvpinterfaces.HotelListPresenter {
+public class HotelListPresenters implements HotelList.HotelListPresenter {
 
-    private HotelListModel model;
-    private HotelListView view;
+    private HotelList.HotelListModel model;
+    private HotelList.HotelListView view;
     private MainView mainActivity;
 
     private Model_Presenter model_presenter = new Model_Presenter() {
@@ -27,7 +26,7 @@ public class HotelListPresenters implements com.example.firstapp.mvpinterfaces.H
         this.mainActivity = mainActivity;
     }
 
-    public HotelListPresenters(HotelListView view) {
+    public HotelListPresenters(HotelList.HotelListView view) {
         this.view = view;
         this.model = new HotelModel();
     }

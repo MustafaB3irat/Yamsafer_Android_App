@@ -77,13 +77,7 @@ public class InternationalPhoneDialog extends DialogFragment {
 
         });
 
-        phoneDialogBinding.SignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                checkCode();
-            }
-        });
+        phoneDialogBinding.SignIn.setOnClickListener(view -> checkCode());
 
 
         return builder.create();
@@ -131,7 +125,7 @@ public class InternationalPhoneDialog extends DialogFragment {
             if (task.isSuccessful()) {
 
                 FirebaseUser user = task.getResult().getUser();
-                Toast.makeText(getContext(), R.string.welcome + user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), getActivity().getString(R.string.welcome) + " " + user.getPhoneNumber(), Toast.LENGTH_SHORT).show();
                 dismiss();
 
                 ((MainActivity) getActivity()).getSignInState(true);
