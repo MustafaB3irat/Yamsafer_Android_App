@@ -12,6 +12,11 @@
             android:icon="@drawable/ic_message_black_24dp"
             android:title="Chat" />
 
+        <item
+            android:id="@+id/share"
+            android:icon="@drawable/ic_share_black_24dp"
+            android:title="Share" />
+
     </group>
 
     <item android:title="Sign Out">

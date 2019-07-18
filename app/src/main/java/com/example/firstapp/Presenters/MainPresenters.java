@@ -1,5 +1,6 @@
 package com.example.firstapp.Presenters;
 
+import com.example.firstapp.models.YamsaferMainScreenModel;
 import com.example.firstapp.models.data.HotDeals;
 import com.example.firstapp.models.data.PopoularOnYamsafer;
 import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.Main;
@@ -15,7 +16,7 @@ public class MainPresenters implements Main.MainPresenter {
 
     public MainPresenters(Main.MainFragment fragment) {
         this.fragment = fragment;
-        mainModel = new com.example.firstapp.models.MainModel();
+        mainModel = new YamsaferMainScreenModel();
     }
 
 

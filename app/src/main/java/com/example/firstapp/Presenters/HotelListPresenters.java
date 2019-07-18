@@ -1,10 +1,10 @@
 package com.example.firstapp.Presenters;
 
 import com.example.firstapp.mvpinterfaces.HotelList;
+import com.example.firstapp.mvpinterfaces.Main;
 import com.example.firstapp.mvpinterfaces.Model_Presenter;
 import com.example.firstapp.models.data.Hotel;
 import com.example.firstapp.models.HotelModel;
-import com.example.firstapp.mvpinterfaces.MainView;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class HotelListPresenters implements HotelList.HotelListPresenter {
 
     private HotelList.HotelListModel model;
     private HotelList.HotelListView view;
-    private MainView mainActivity;
+    private Main.MainView mainActivity;
 
     private Model_Presenter model_presenter = new Model_Presenter() {
         @Override
@@ -22,7 +22,7 @@ public class HotelListPresenters implements HotelList.HotelListPresenter {
         }
     };
 
-    public HotelListPresenters(MainView mainActivity) {
+    public HotelListPresenters(Main.MainView mainActivity) {
         this.mainActivity = mainActivity;
     }
 

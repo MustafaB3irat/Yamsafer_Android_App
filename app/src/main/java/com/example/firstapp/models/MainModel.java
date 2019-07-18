@@ -1,88 +1,86 @@
 package com.example.firstapp.models;
 
-import com.example.firstapp.interfaces.HotDealsAPI;
-import com.example.firstapp.interfaces.PopoularAPI;
-import com.example.firstapp.interfaces.RecentApi;
-import com.example.firstapp.models.data.HotDeals;
-import com.example.firstapp.models.data.PopoularOnYamsafer;
-import com.example.firstapp.models.data.RecentSearches;
-import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.Main;
-import com.example.firstapp.mvpinterfaces.MainFragmentInterfaces.Main_Model_Presenter;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import android.content.Intent;
+import android.net.Uri;
 
-import java.util.List;
+import androidx.annotation.NonNull;
 
-import retrofit2.Call;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import com.example.firstapp.Presenters.ActivityMainPresenter;
+import com.example.firstapp.mvpinterfaces.Main;
+import com.example.firstapp.views.MainActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.ShortDynamicLink;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
-public class MainModel implements Main.MainModel {
+public class MainModel implements Main.MainActivityModel {
+
+    private FirebaseRemoteConfig firebaseRemoteConfig;
+    private FirebaseDynamicLinks firebaseDynamicLinks;
+    private Main.ActivityMainPresenter presenter;
 
 
-    private Gson gson = new GsonBuilder().setLenient().create();
+    public MainModel(ActivityMainPresenter presenter) {
 
+        this.presenter = presenter;
+
+        firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+
+        firebaseDynamicLinks = FirebaseDynamicLinks.getInstance();
+    }
 
     @Override
-    public void setRecentSearchesData(final Main_Model_Presenter presenter) {
+    public void initiateRemoteConfig() {
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(RecentApi.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
+        FirebaseRemoteConfigSettings remoteConfigSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setDeveloperModeEnabled(true).setFetchTimeoutInSeconds(3600)
+                .build();
 
-        RecentApi recentApi = retrofit.create(RecentApi.class);
+        firebaseRemoteConfig.setConfigSettings(remoteConfigSettings);
+        firebaseRemoteConfig.setDefaults(MainActivity.defaultValuesForRemoteConfig);
+    }
 
-        Call<List<RecentSearches>> call = recentApi.getRecent();
-
-        call.enqueue(new ResponseHandler<List<RecentSearches>>() {
-            @Override
-            public void onResult(Boolean isSuccessful, List<RecentSearches> result) {
-
-                if (isSuccessful) {
-                    presenter.setRecentSearches(result);
-                }
-            }
-        });
+    @Override
+    public void fetchNewValues() {
 
     }
 
     @Override
-    public void setHotDealsData(Main_Model_Presenter presenter) {
+    public void buildDynamicLink(OnCompleteListener<ShortDynamicLink> onCompleteListener) {
+        String longLink = firebaseDynamicLinks.createDynamicLink()
+                .setDomainUriPrefix("https://yamsafermustafa.page.link")
+                .setLink(Uri.parse("https://www.youtube.com/channel/UCo1_4CUyejRBFY3sW_nqzyQ?view_as=subscriber"))
+                .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build())
+                .setSocialMetaTagParameters(new DynamicLink.SocialMetaTagParameters.Builder().setTitle("Share this app").setDescription("This is a clone of Yamsafer App").setImageUrl(Uri.parse("http://www.krugerpark.co.za/images/1-lion-charge-gc590a.jpg")).build())
+                .buildDynamicLink().getUri().toString();
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(HotDealsAPI.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
+        firebaseDynamicLinks.createDynamicLink().setLongLink(Uri.parse(longLink))
+                .buildShortDynamicLink()
+                .addOnCompleteListener(onCompleteListener);
 
-        HotDealsAPI hotDealsAPI = retrofit.create(HotDealsAPI.class);
-
-        Call<List<HotDeals>> call = hotDealsAPI.getHotDeals();
-
-        call.enqueue(new ResponseHandler<List<HotDeals>>() {
-            @Override
-            public void onResult(Boolean isSuccessful, List<HotDeals> result) {
-
-                if (isSuccessful) {
-                    presenter.setHotDeals(result);
-                }
-            }
-        });
     }
 
     @Override
-    public void setPopularOnYamsaferData(Main_Model_Presenter presenter) {
+    public void shareApp() {
 
+        OnCompleteListener<ShortDynamicLink> onCompleteListener = task -> {
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(PopoularAPI.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).build();
+            if (task.isSuccessful()) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, "Share this App " + task.getResult().getShortLink());
+                intent.setType("text/plain");
 
-        PopoularAPI popoularAPI = retrofit.create(PopoularAPI.class);
-
-        Call<List<PopoularOnYamsafer>> call = popoularAPI.getPopulars();
-
-        call.enqueue(new ResponseHandler<List<PopoularOnYamsafer>>() {
-            @Override
-            public void onResult(Boolean isSuccessful, List<PopoularOnYamsafer> result) {
-
-                if (isSuccessful) {
-                    presenter.setPopulars(result);
-                }
+                presenter.setIntentFromDynamicLink(intent);
             }
-        });
+
+        };
+
+        buildDynamicLink(onCompleteListener);
+
 
     }
 }

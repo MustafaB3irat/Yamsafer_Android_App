@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:layout_marginTop="4dp"
-                android:background="@color/signInIcon"
+                android:background="@color/floating_action_button"
                 android:padding="2dp"
                 android:text="@string/new_badge"
                 android:textColor="@color/white"

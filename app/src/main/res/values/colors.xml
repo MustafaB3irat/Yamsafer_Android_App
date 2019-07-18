@@ -12,7 +12,7 @@
     <color name="unFocusedIcon">#2854A1</color>
     <color name="link">#0645AD</color>
     <color name="bottomNavbg">#f5f5f5</color>
-    <color name="signInIcon">#CC0000</color>
+    <color name="floating_action_button">#CC0000</color>
     <color name="searchBar">#2854A1</color>
     <color name="recent_search">#384C6F</color>
     <color name="transparent_blue_percent_80">#992854A1</color>

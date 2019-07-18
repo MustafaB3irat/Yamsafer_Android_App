@@ -2,7 +2,7 @@ package com.example.firstapp.views;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -24,23 +24,32 @@ import com.example.firstapp.databinding.ActivityMainBinding;
 import com.example.firstapp.databinding.SidebarHeaderBinding;
 import com.example.firstapp.fragmentsadapters.FragementAdpater;
 import com.example.firstapp.models.data.UserProfile;
-import com.example.firstapp.mvpinterfaces.ActivityMainPresenter;
-import com.example.firstapp.mvpinterfaces.MainView;
+import com.example.firstapp.mvpinterfaces.Main;
 import com.example.firstapp.views.fragments.SearchUsersFragment;
 import com.example.firstapp.views.fragments.FlightsFragment;
 import com.example.firstapp.views.fragments.HotelsListFragment;
 import com.example.firstapp.views.fragments.MainFragments;
 import com.example.firstapp.views.fragments.SignInFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainActivity extends AppCompatActivity implements Main.MainView {
 
     public ActivityMainBinding activityMainBinding;
     private FragementAdpater fragementAdpater;
-    private ActivityMainPresenter presenter;
+    private Main.ActivityMainPresenter presenter;
     private View sidebar_header;
     private SidebarHeaderBinding sidebarHeaderBinding;
+    public static Map<String, Object> defaultValuesForRemoteConfig = new HashMap<>();
+    private FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+    private static String REMOTE_CONFIG_TEST_TEXT = "remote_config_test_text";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +69,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
         initFragments();
 
         fragmentSwitcher();
+
+        defaultValuesForRemoteConfig.put(REMOTE_CONFIG_TEST_TEXT, "Wassaab");
+        initiateRemoteConfig();
+        trackFloatingActionButtonColorValue();
 
 
     }
@@ -151,12 +164,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
             case R.id.chat: {
                 activityMainBinding.fragments.setCurrentItem(4);
             }
+            break;
 
         }
     }
 
     @Override
     public void redirectUser() {
+        presenter.logChatButtonClickedEvent();
 
         if (presenter.isUserSignedIn()) {
 
@@ -257,10 +272,45 @@ public class MainActivity extends AppCompatActivity implements MainView {
             }
             break;
 
+            case R.id.share: {
+                activityMainBinding.drawer.closeDrawer(GravityCompat.START);
+                presenter.shareApp();
+
+            }
+            break;
+
 
         }
 
         return true;
+    }
+
+    @Override
+    public void initiateRemoteConfig() {
+
+        FirebaseRemoteConfigSettings remoteConfigSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setDeveloperModeEnabled(true).setFetchTimeoutInSeconds(3600)
+                .build();
+
+        firebaseRemoteConfig.setConfigSettings(remoteConfigSettings);
+        firebaseRemoteConfig.setDefaults(defaultValuesForRemoteConfig);
+    }
+
+    @Override
+    public void trackFloatingActionButtonColorValue() {
+
+        firebaseRemoteConfig.fetchAndActivate().addOnCompleteListener(task -> {
+
+//            if (task.isSuccessful())
+//                activityMainBinding.remoteConfig.setText(firebaseRemoteConfig.getString(REMOTE_CONFIG_TEST_TEXT));
+            // activityMainBinding.signin.setSupportBackgroundTintList(getResources().getColorStateList(Integer.parseInt(firebaseRemoteConfig.getString("floating_action_button"))));
+        });
+
+    }
+
+    @Override
+    public void shareApp(Intent intent) {
+        startActivity(intent);
     }
 
 }

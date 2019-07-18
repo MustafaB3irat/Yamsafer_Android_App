@@ -1,11 +1,16 @@
 package com.example.firstapp.Presenters.chat;
 
 import android.net.Uri;
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.firstapp.models.chat.ChatModelImp;
 import com.example.firstapp.models.data.Message;
 import com.example.firstapp.mvpinterfaces.chat.Chat;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseUser;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,6 +22,7 @@ public class ChatPresenterImpl implements Chat.ChatPresenter {
     public ChatPresenterImpl(Chat.ChatView view) {
         this.view = view;
         model = new ChatModelImp(this);
+
     }
 
 
@@ -44,9 +50,9 @@ public class ChatPresenterImpl implements Chat.ChatPresenter {
     }
 
     @Override
-    public void sendMessage(String message ,boolean isImage) {
+    public void sendMessage(String message, boolean isImage) {
 
-        model.addMessage(message , isImage);
+        model.addMessage(message, isImage);
 
     }
 
@@ -86,6 +92,8 @@ public class ChatPresenterImpl implements Chat.ChatPresenter {
     public void setImageURI(Uri imageURI) {
 
     }
+
+
 
 
 }

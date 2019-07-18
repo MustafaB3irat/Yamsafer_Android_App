@@ -30,7 +30,7 @@
                 android:id="@+id/signin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/signInIcon"
+                android:backgroundTint="@color/floating_action_button"
                 android:src="@drawable/ic_signin"
                 app:borderWidth="0dp"
                 app:layout_constraintBottom_toTopOf="@+id/nav"
@@ -38,6 +38,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/nav"
                 app:rippleColor="@android:color/transparent" />
+            <!--<TextView-->
+                <!--android:id="@+id/remoteConfig"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="Remote Config Test"-->
+                <!--app:layout_constraintBottom_toTopOf="@+id/signin"-->
+                <!--app:layout_constraintStart_toStartOf="@+id/signin"-->
+                <!--app:layout_constraintEnd_toEndOf="@+id/signin"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="15sp"-->
+                <!--android:textStyle="bold"/>-->
 
 
             <com.example.firstapp.customComponents.CurvedBottomNavigationView
@@ -65,6 +77,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:itemIconTint="@color/searchBar"
+            app:itemTextColor="@color/searchBar"
             app:menu="@menu/sidebar_menu">
 
         </com.google.android.material.navigation.NavigationView>

@@ -55,6 +55,7 @@ public class ChatModelImp implements Chat.ChatModel {
     private DocumentReference chat;
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
     private StorageReference storageReference = firebaseStorage.getReference();
+   // private Crashlytics crashlytics = Crashlytics.getInstance();
 
 
     public ChatModelImp(Chat.ChatPresenter presenter) {
@@ -216,22 +217,29 @@ public class ChatModelImp implements Chat.ChatModel {
     public void getImageURIAndUploadIt(String imageUri, OnCompleteListener<Uri> onCompleteListener) throws URISyntaxException {
 
 
-        StorageMetadata metadata = new StorageMetadata.Builder().setContentType("image/jpg").build();
+        try {
 
-        Uri image = Uri.fromFile(new File(imageUri));
+            StorageMetadata metadata = new StorageMetadata.Builder().setContentType("image/jpg").build();
 
-        StorageReference imageReference = storageReference.child("Uploads/"+UUID.randomUUID() + ".jpg");
+            Uri image = Uri.fromFile(new File(imageUri));
+
+            StorageReference imageReference = storageReference.child("Uploads/" + UUID.randomUUID() + ".jpg");
 
 
-        UploadTask uploadTask = imageReference.putFile(image, metadata);
+            UploadTask uploadTask = imageReference.putFile(image, metadata);
 
-        uploadTask.continueWithTask(task -> {
+            uploadTask.continueWithTask(task -> {
 
-            if (task.isSuccessful())
-                return imageReference.getDownloadUrl();
+                if (task.isSuccessful())
+                    return imageReference.getDownloadUrl();
 
-            return null;
-        }).addOnCompleteListener(onCompleteListener);
+                return null;
+            }).addOnCompleteListener(onCompleteListener);
+
+
+        } catch (Exception e) {
+            //crashlytics.core.logException(e);
+        }
 
     }
 

@@ -1,8 +1,12 @@
 package com.example.firstapp.Presenters;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 
+import com.example.firstapp.models.MainModel;
 import com.example.firstapp.models.data.UserProfile;
+import com.example.firstapp.mvpinterfaces.Main;
 import com.example.firstapp.views.MainActivity;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -11,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -19,17 +24,23 @@ import org.json.JSONObject;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ActivityMainPresenter implements com.example.firstapp.mvpinterfaces.ActivityMainPresenter {
+public class ActivityMainPresenter implements Main.ActivityMainPresenter {
 
 
     private MainActivity activity;
+    private Main.MainActivityModel model;
 
     private GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
     private GoogleSignInClient googleSignInClient;
 
+    private FirebaseAnalytics firebaseAnalytics;
+    private final static String CHAT_BUTTON_CLICK_EVENT = "chat_button_click_event";
+
     public ActivityMainPresenter(MainActivity activity) {
         this.activity = activity;
         googleSignInClient = GoogleSignIn.getClient(activity, googleSignInOptions);
+        firebaseAnalytics = FirebaseAnalytics.getInstance(activity);
+        model = new MainModel(this);
     }
 
     @Override
@@ -88,11 +99,11 @@ public class ActivityMainPresenter implements com.example.firstapp.mvpinterfaces
         } else if (GoogleSignIn.getLastSignedInAccount(activity) != null) {
 
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(activity);
-            activity.getUserProfile(new UserProfile(acct.getDisplayName(), acct.getEmail(), acct.getPhotoUrl().toString(), "" , null));
+            activity.getUserProfile(new UserProfile(acct.getDisplayName(), acct.getEmail(), acct.getPhotoUrl().toString(), "", null));
         } else {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            activity.getUserProfile(new UserProfile(user.getEmail(), "", "", "" , null));
+            activity.getUserProfile(new UserProfile(user.getEmail(), "", "", "", null));
         }
 
 
@@ -130,5 +141,22 @@ public class ActivityMainPresenter implements com.example.firstapp.mvpinterfaces
         }
 
         return user_profile;
+    }
+
+    @Override
+    public void logChatButtonClickedEvent() {
+        Bundle bundle = new Bundle();
+        bundle.putString("test", "test");
+        firebaseAnalytics.logEvent(CHAT_BUTTON_CLICK_EVENT, bundle);
+    }
+
+    @Override
+    public void shareApp() {
+        model.shareApp();
+    }
+
+    @Override
+    public void setIntentFromDynamicLink(Intent intent) {
+        activity.shareApp(intent);
     }
 }

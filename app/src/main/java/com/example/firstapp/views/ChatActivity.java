@@ -2,7 +2,6 @@ package com.example.firstapp.views;
 
 import android.Manifest;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -36,8 +35,6 @@ import com.example.firstapp.mvpinterfaces.chat.Chat;
 import com.example.firstapp.recyclerviewadapters.MessageAdapter;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -93,7 +93,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="50dp"
                     android:drawableStart="@drawable/ic_flame"
-                    android:drawableTint="@color/signInIcon"
+                    android:drawableTint="@color/floating_action_button"
                     android:text="@string/hote_deals"
                     android:textColor="@color/recent_search"
                     android:textSize="16sp"
